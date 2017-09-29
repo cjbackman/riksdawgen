@@ -1,24 +1,46 @@
 {
-	"extends": ["eslint:recommended", "plugin:react/recommended"],
-    "env": {
-		"browser": true,
-        "es6": true
-	},
-	"parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "sourceType": "module"
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:import/errors"
+  ]
+  ,"parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-		"no-console":0,
-        "indent": ["error", 2],
-        "linebreak-style": ["error", "windows"],
-        "quotes": ["error","single"],
-        "semi": ["error", "always"],
-		"react/jsx-uses-vars": ["error"]
-    }
+    "sourceType": "module"
+  }
+  ,"env": {
+    "browser": true,
+    "es6": true
+  }
+  ,"plugins": [
+    "react",
+    "import"
+  ]
+  ,"rules": {
+    "no-console": 0
+  }
+  // ,"rules": {
+  //   "no-console": 0,
+  //   "indent": [
+  //     "error",
+  //     2
+  //   ],
+  //   "linebreak-style": [
+  //     "error",
+  //     "windows"
+  //   ],
+  //   "quotes": [
+  //     "error",
+  //     "single"
+  //   ],
+  //   "semi": [
+  //     "error",
+  //     "always"
+  //   ],
+  //   "react/jsx-uses-vars": [
+  //     "error"
+  //   ]
+  // }
 }
