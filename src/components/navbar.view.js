@@ -8,7 +8,7 @@ export class Navbar extends Component {
       links: [
         { to: '/home', title: 'Hem' },
         { to: '/votes', title: 'Voteringar' },
-        { to: '/members', title: 'Ledamöter' }
+        { to: '/votes', title: 'Voteringar' }
       ]
     }
   }

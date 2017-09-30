@@ -9,7 +9,7 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 
 module.exports = {
 	devtool: 'cheap-module-source-map',
-	entry: './src/index.js',
+	entry: ['babel-polyfill', './src/index.js'],
 	output: {
 		path: path.resolve('dist'),
 		publicPath: '/',
