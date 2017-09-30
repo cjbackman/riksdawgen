@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import api from '../data/votes.json';
 import { Link } from 'react-router-dom';
 
-export class VotesPage extends Component {
+export class MembersPage extends Component {
   constructor() {
     super();
     this.state = {
-      votes: []
+      members: []
     }
   }
 
   componentDidMount() {
-    let votes = api.votering;
-    this.setState({ votes });
+    let members = api.votering;
+    this.setState({ members });
   }
 
   render() {
@@ -26,15 +26,15 @@ export class VotesPage extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.votes.map(v =>
-              <tr key={v.intressent_id}>
+            {this.state.members.map(m =>
+              <tr key={m.intressent_id}>
                 <td>
-                  <Link to={`/members/${v.intressent_id}`} >
-                    { v.namn }
+                  <Link to={`/members/${m.intressent_id}`} >
+                    { m.namn }
                   </Link>
                 </td>
                 <td>
-                  {v.parti}
+                  {m.parti}
                 </td>
               </tr>
             )}

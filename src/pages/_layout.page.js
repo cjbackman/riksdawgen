@@ -3,6 +3,8 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { Navbar } from '../components/navbar.view.js';
 import { HomePage } from './home.page.js';
 import { VotesPage } from './votes.page.js';
+import { MembersPage } from './members.page.js';
+import { MemberPage } from './member.page.js';
 
 export const Layout = () => (
   <div style={styles.container}>
@@ -11,6 +13,8 @@ export const Layout = () => (
       <Redirect from="/" exact to="/home" />
       <Route exact path='/home' component={HomePage} />
       <Route exact path='/votes' component={VotesPage} />
+      <Route exact path='/members' component={MembersPage} />
+      <Route path='/members/:id' component={MemberPage} />
       <Route component={() => <div>ERR</div>} />
     </Switch>
   </div>

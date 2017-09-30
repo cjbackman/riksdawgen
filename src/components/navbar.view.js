@@ -7,7 +7,8 @@ export class Navbar extends Component {
     this.state = {
       links: [
         { to: '/home', title: 'Hem' },
-        { to: '/votes', title: 'Voteringar' }
+        { to: '/votes', title: 'Voteringar' },
+        { to: '/members', title: 'Ledamöter' }
       ]
     }
   }
