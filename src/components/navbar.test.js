@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Navbar } from './navbar.view.js';
+import { Navbar } from './Navbar.js';
 
 describe('<Navbar />', () => {
   it('should render three <NavLink /> components', () => {
