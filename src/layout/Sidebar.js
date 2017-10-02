@@ -61,10 +61,11 @@ const styles = {
     paddingTop: '2rem'
   },
   sidebarContainer: {
+    flex: 1,
     height: '100vh',
-    width: '16.25rem',
     background: '#3d3780',
     boxShadow: '0 8px 20px 0 rgba(40,37,89,.6)',
+    borderRadius: '10px'
   },
   hidden: {
     transition: 'opacity .25s ease-in-out',

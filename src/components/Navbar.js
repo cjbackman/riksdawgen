@@ -40,9 +40,9 @@ const styles = {
     fontFamily: 'Exo',
     fontSize: '1rem',
     lineHeight: '1.25',
-    position:'fixed',
-    left: '0',
-    right: '0',
+    // position:'fixed',
+    // left: '0',
+    // right: '0',
   },
   nav: {
     boxShadow: '0 8px 20px 0 rgba(40,37,89,.6)',

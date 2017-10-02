@@ -5,9 +5,15 @@ import { LayoutFooter } from './LayoutFooter.js';
 
 export const Layout = () => (
   <div style={styles.pageContainer}>
-    <LayoutHeader style={{flex: '0 0 auto'}} />
-    <LayoutContent style={{flex: '1 1 auto'}} />
-    <LayoutFooter style={{flex: '0 0 auto'}} />
+    <div style={{ flex: '1 100%', marginBottom: '2rem' }}>
+      <LayoutHeader/>
+    </div>
+    <div style={{ flex: '4', margin: '0 1rem', marginBottom: '2rem' }}>
+      <LayoutContent/>
+    </div>
+    <div style={{ flex: '1 100%' }}>
+      <LayoutFooter/>
+    </div>
   </div>
 );
 
