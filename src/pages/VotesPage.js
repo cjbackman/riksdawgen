@@ -1,53 +1,36 @@
-import React, { Component } from 'react';
-import api from '../data/votes.json';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { VotesTable } from '../components/VotesTable';
 
-export class VotesPage extends Component {
-  constructor() {
-    super();
-    this.state = {
-      votes: []
-    }
-  }
-
-  componentDidMount() {
-    let votes = api.votering;
-    this.setState({ votes });
-  }
-
-  render() {
-    return (
-      <table style={styles.table}>
-        <thead>
-          <tr>
-            <th>Namn</th>
-            <th>Parti</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.state.votes.map(v =>
-            <tr key={v.intressent_id}>
-              <td>
-                <Link to={`/members/${v.intressent_id}`} >
-                  {v.namn}
-                </Link>
-              </td>
-              <td>
-                {v.parti}
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    );
-  }
-}
-
+export const VotesPage = () => (
+  <div style={styles.container}>
+    <div style={styles.third}>
+      <VotesTable />
+    </div>
+    <div style={styles.twoThirds}>
+      2
+    </div>
+  </div>
+);
 
 const styles = {
-  table: {
-    margin: '10rem auto',
-    width: '20%',
-    textAlign: 'left'
+  container: {
+    display: 'flex',
+    flexFlow: 'wrap'
+  },
+  third: {
+    flex: '0 0 30%',
+    textAlign: 'center',
+    background: '#3d3780',
+    boxShadow: '0 8px 20px 0 rgba(40,37,89,.6)',
+    borderRadius: '10px',
+    marginLeft: '1%',
+    minHeight: '40rem'
+  },
+  twoThirds: {
+    flex: '0 0 67%',
+    background: '#3d3780',
+    boxShadow: '0 8px 20px 0 rgba(40,37,89,.6)',
+    borderRadius: '10px',
+    marginLeft: '1%',
   }
 }

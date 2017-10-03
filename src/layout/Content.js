@@ -20,7 +20,6 @@ export const Content = () => (
 
 const styles = {
   container: {
-    flex: 5,
-    marginTop: '5rem'
+    flex: 5
   }
 }
