@@ -19,7 +19,7 @@
 
 .main {
   display:flex;
-  margin-top: 5.5rem;
+  margin-top: 4.5rem;
 }
 
 .sidebar {
@@ -40,11 +40,25 @@
 
 .content {
   flex: 1;
+  overflow-y: scroll;
+  height: 90vh;
 
   > div {
     display: flex;
     flex-flow: column;
   }
+}
+
+.content::-webkit-scrollbar {
+  width: 1.2em;
+}
+
+.content::-webkit-scrollbar-track-piece {
+  background-color: $scrollbar-background-color;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background-color: $scrollbar-color;
 }
 
 .content-wrapper {
