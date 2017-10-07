@@ -9,7 +9,8 @@ export const NavbarLogo = () => (
 
 const styles = {
   container: {
-    textAlign: 'right'
+    textAlign: 'right',
+    marginRight: '3rem'
   },
   img: {
     height: '2rem',

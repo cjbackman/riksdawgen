@@ -1,15 +1,9 @@
-.box {
+.box, .half, .oneThird, .twoThirds, .quarter, .whole {
   border: solid 1em $background-color;
   background: $box-color;
   box-sizing: border-box;
   min-height:600px;
-}
-
-.half, .oneThird, .twoThirds, .quarter, .whole {
-  border: solid 1em $background-color;
-  background: $box-color;
-  box-sizing: border-box;
-  min-height:600px;
+  border-radius: 1.5rem;
 }
 
 .half, .oneThird, .twoThirds, .quarter, .whole {

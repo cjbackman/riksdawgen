@@ -27,7 +27,7 @@ const styles = {
     display: 'flex',
     fontSize:'1rem',
     margin: '1rem',
-    color: '#a1a1e5',
+    color: '#fff',
   },
   itemLabel: {
     flex: '1',
