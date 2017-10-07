@@ -1,14 +1,21 @@
-# riksdawgen
-Politics, da G style
+Riksdawgen
+=========
 
-To get shit done, run
+Politics
 
-npm install
+### Installation
+  `npm install`
 
-followed by
+###### If it goes to shit:
+  `npm install -g webpack webpack-dev-server`
 
-npm run dev
+### Development
+  `npm run dev`
 
-/Gmasta
+### Build
+  `npm run build`
 
+### Tests
+  `npm run test`
 
+  Currently fails, of course.
