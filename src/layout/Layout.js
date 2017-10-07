@@ -1,28 +1,45 @@
 import React from 'react';
-import { LayoutHeader } from './LayoutHeader.js';
-import { LayoutContent } from './LayoutContent.js';
-import { LayoutFooter } from './LayoutFooter.js';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import { Header } from './Header.js';
+import { Sidebar } from './Sidebar.js';
+import { Content } from './Content.js';
+import { Footer } from './Footer.js';
 
-export const Layout = () => (
-  <div style={styles.pageContainer}>
-    <div style={{ flex: '1 100%', marginBottom: '2rem' }}>
-      <LayoutHeader/>
-    </div>
-    <div style={{ flex: '4', margin: '0 1rem', marginBottom: '2rem' }}>
-      <LayoutContent/>
-    </div>
-    <div style={{ flex: '1 100%' }}>
-      <LayoutFooter/>
-    </div>
-  </div>
-);
+export const _Layout = ({showSidebar}) => {
+  const sidebar = classNames('sidebar', { 'hide': !showSidebar });
+  const innerSidebar = classNames('box', { 'hide': !showSidebar });
 
-const styles = {
-  pageContainer: {
-    fontFamily: 'Exo',
-    display: 'flex',
-    minHeight: '100vh',
-    flexDirection: 'column',
-    background: '#2f296b'
-  }
+  return (
+    <div className="page-wrapper">
+      <div className="header">
+        <Header />
+      </div>
+      <div className="main">
+        <div className={sidebar}>
+          <div className={innerSidebar}>
+            <Sidebar />
+          </div>
+        </div>
+        <div className="content">
+          <div>
+            <Content />
+            <Footer />
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+};
+
+_Layout.propTypes = {
+  showSidebar: PropTypes.bool.isRequired
 }
+
+const mapStateToProps = state => ({
+  showSidebar: state.menu.showSidebar
+})
+
+export const Layout = withRouter(connect(mapStateToProps)(_Layout));

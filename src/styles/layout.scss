@@ -1,0 +1,46 @@
+
+
+// $background-color: #17412D;
+// $box-color:#284D3B;
+
+.page-wrapper {
+  display: flex;
+  flex-flow: column;
+  background: $background-color;
+  min-height: 100vh;
+}
+
+.main {
+  display:flex;
+  margin-top: 5.5rem;
+}
+
+.sidebar {
+  min-width: 12rem;
+  width: 15%;
+
+  > div {
+    height: 100%;
+    min-width: 12rem;
+    width: 15%;
+    position: fixed;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.content {
+  flex: 1;
+
+  > div {
+    display: flex;
+    flex-flow: column;
+  }
+}
+
+.content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}

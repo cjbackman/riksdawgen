@@ -19,7 +19,8 @@ module.exports = {
 		loaders: [
 			{ enforce: 'pre', test: /\.js$/, loader: 'eslint-loader', exclude: /node_modules/},
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.(png|jpg|gif|png)$/, loader: 'file-loader' }
+      { test: /\.(png|jpg|gif|png)$/, loader: 'file-loader' },
+      { test: /\.scss$/, loaders: [{ loader: "style-loader" }, { loader: "css-loader" }, { loader: "sass-loader" }] }
 		]
 	},
 	devServer: {

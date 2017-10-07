@@ -1,0 +1,43 @@
+.box {
+  border: solid 1em $background-color;
+  background: $box-color;
+  box-sizing: border-box;
+  min-height:600px;
+}
+
+.half, .oneThird, .twoThirds, .quarter, .whole {
+  border: solid 1em $background-color;
+  background: $box-color;
+  box-sizing: border-box;
+  min-height:600px;
+}
+
+.half, .oneThird, .twoThirds, .quarter, .whole {
+  width: 100%;
+  justify-content: space-between;
+}
+
+/* Large screens */
+@media all and (min-width: 1200px) {
+  .whole {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .half {
+    width: 50%;
+    justify-content: space-between;
+  }
+  .oneThird {
+    width: 33%;
+    justify-content: space-between;
+  }
+  .twoThirds {
+    width: 67%;
+    justify-content: space-between;
+  }
+  .quarter {
+    width: 25%;
+    justify-content: space-between;
+  }
+
+}

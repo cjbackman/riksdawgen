@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar } from '../components/Navbar.js';
 
-export const LayoutHeader = () => (
+export const Header = () => (
   <div style={styles.container}>
     <Navbar />
   </div>
@@ -9,6 +9,8 @@ export const LayoutHeader = () => (
 
 const styles = {
   container: {
-    zIndex:10
+    zIndex:10,
+    position: 'fixed',
+    width: '100%'
   }
 }

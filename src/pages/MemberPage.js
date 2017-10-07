@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export const MemberPage = ({ match }) => (
-  <div>
-    { match.params.id }
+  <div className="content-wrapper">
+    <div className="whole">
+      Member with ID: { match.params.id }
+    </div>
   </div>
 )
 
