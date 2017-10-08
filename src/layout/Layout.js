@@ -1,28 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { Header } from './Header.js';
 import { Sidebar } from './Sidebar.js';
 import { Content } from './Content.js';
 import { Footer } from './Footer.js';
 
-export const _Layout = ({showSidebar}) => {
-  const sidebar = classNames('sidebar', { 'hide': !showSidebar });
-  const innerSidebar = classNames('box', { 'hide': !showSidebar });
-
+export const _Layout = ({showSidebar, location}) => {
   return (
     <div className="page-wrapper">
       <div className="header">
         <Header />
       </div>
       <div className="main">
-        <div className={sidebar}>
-          <div className={innerSidebar}>
-            <Sidebar />
-          </div>
-        </div>
+        <Sidebar path={location.pathname} show={showSidebar} />
         <div className="content">
           <div>
             <Content />
@@ -35,7 +27,8 @@ export const _Layout = ({showSidebar}) => {
 };
 
 _Layout.propTypes = {
-  showSidebar: PropTypes.bool.isRequired
+  showSidebar: PropTypes.bool.isRequired,
+  location: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({

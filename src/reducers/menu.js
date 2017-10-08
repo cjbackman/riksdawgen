@@ -1,9 +1,8 @@
 import { TOGGLE_SIDEBAR } from '../actions/actionTypes';
 
-export const menu = (state = { showSidebar: true }, action) => {
+export const menu = (state = { showSidebar: false }, action) => {
   switch (action.type) {
     case TOGGLE_SIDEBAR:
-      console.log(action.type);
       return Object.assign({}, state, {
         showSidebar: !state.showSidebar
       });

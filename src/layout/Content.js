@@ -4,6 +4,7 @@ import { HomePage } from '../pages/HomePage.js';
 import { VotesPage } from '../pages/VotesPage.js';
 import { MembersPage } from '../pages/MembersPage.js';
 import { MemberPage } from '../pages/MemberPage.js';
+import { ErrorPage } from '../pages/ErrorPage.js';
 
 export const Content = () => (
   <Switch>
@@ -12,6 +13,6 @@ export const Content = () => (
     <Route exact path='/votes' component={VotesPage} />
     <Route exact path='/members' component={MembersPage} />
     <Route path='/members/:id' component={MemberPage} />
-    <Route component={() => <div>ERR</div>} />
+    <Route component={ErrorPage} />
   </Switch>
 );

@@ -1,0 +1,40 @@
+.navbar {
+  height: 3rem;
+  padding: 1.25rem;
+  color: $text-color;
+  margin: 0 auto;
+  display: flex;
+
+  .navbar-icon {
+    flex: 1;
+  }
+
+  .navbar-menu {
+    flex: 4;
+
+    .navbar-link {
+      text-decoration: none;
+      text-transform: uppercase;
+      color: $text-color;
+      margin: 0 2rem;
+      font-size: 1.25rem;
+      font-weight: bold;
+      letter-spacing: 3px;
+
+      &.active {
+        border-bottom: 3px solid $text-color;
+      }
+    }
+  }
+
+  .navbar-logo {
+    flex: 1;
+    margin-right: 3rem;
+    text-align: right;
+
+    img {
+      height: 2rem;
+      width: 8rem;
+    }
+  }
+}

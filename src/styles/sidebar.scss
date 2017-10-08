@@ -1,0 +1,33 @@
+.sidebar-list {
+  margin-top: 2rem;
+  font-size: .875rem;
+  color: $text-color;
+
+  .sidebar-header {
+    font-weight: 500;
+    padding: 1rem 1.25rem;
+  }
+
+  .sidebar-item {
+    align-items: center;
+    display: flex;
+    font-size: 1rem;
+    margin: 1rem;
+
+    > span {
+      flex: 1;
+      margin-left: 1rem;
+    }
+  }
+
+  .sidebar-child-list {
+    margin: 0 0.3rem;
+    background-color: $background-color;
+
+    .sidebar-child-item {
+      margin-left: 1rem;
+      align-items: center;
+    }
+  }
+
+}

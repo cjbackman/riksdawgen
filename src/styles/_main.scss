@@ -1,9 +1,22 @@
 @import './variables.scss';
-@import "./layout.scss";
-@import "./boxes.scss";
+@import './layout.scss';
+@import './boxes.scss';
+@import './sidebar.scss';
+@import './footer.scss';
+@import './navbar.scss';
 
 html, body, ul, li {
   margin: 0;
   padding: 0;
   font-family: 'Quicksand';
+}
+
+.icon {
+  height: 2rem;
+  width: 2rem;
+  color: $icon-color;
+}
+
+.pointer {
+  cursor: pointer;
 }
