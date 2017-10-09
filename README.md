@@ -12,3 +12,5 @@ Build and bundle the static files with
 
 Finally, start the service by running
 ```docker-compose up```
+
+http://riksdawgen:8080 in the front, http://riksdawgen:8080/api in the back.
