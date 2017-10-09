@@ -1,23 +1,13 @@
-FROM tiangolo/uwsgi-nginx-flask:python3.6
+FROM nginx:latest
 
-# Settings
-ENV STATIC_INDEX 1
-ENV STATIC_PATH dist/
+EXPOSE 80
 
-# Backend
-#RUN pip install -U pip
-#RUN pip install -r requirements.txt
+# Set working directory
+RUN mkdir -p /usr/src/app
 
-# Frontend
-RUN apt-get -y update && \
-    apt-get -y install build-essential && \
-    curl -sL https://deb.nodesource.com/setup | bash - && \
-    apt-get install -y nodejs
+# Add nginx config
+COPY nginx.conf /etc/nginx/nginx.conf
 
-COPY . /
-WORKDIR /
-
-RUN npm install
-RUN npm build
-
-ENV MESSAGE "Welcome to Riksdawgen"
+# Copy static assets into /usr/src
+COPY ./dist /usr/src/app
+COPY ./node_modules /usr/src/app/node_modules

@@ -1,21 +1,14 @@
 Riksdawgen
 =========
 
-Politics
+### Quickstart
+Install all dependencies by
+```npm install```
 
-### Installation
-  `npm install`
+**Note:** if it fails, try `npm install -g webpack webpack-dev-server`.
 
-###### If it goes to shit:
-  `npm install -g webpack webpack-dev-server`
+Build and bundle the static files with
+```npm run build```
 
-### Development
-  `npm run dev`
-
-### Build
-  `npm run build`
-
-### Tests
-  `npm run test`
-
-  Currently fails, of course.
+Finally, start the service by running
+```docker-compose up```
