@@ -1,21 +1,26 @@
 Riksdawgen
 =========
 
-Politics
+### Quickstart
 
-### Installation
-  `npm install`
+Add the following line to `/etc/host`
 
-###### If it goes to shit:
-  `npm install -g webpack webpack-dev-server`
+```127.0.0.1 riksdawgen```
 
-### Development
-  `npm run dev`
+Install all dependencies
 
-### Build
-  `npm run build`
+```cd front/ && npm install```
 
-### Tests
-  `npm run test`
+**Note:** if it fails, try `npm install -g webpack webpack-dev-server`.
 
-  Currently fails, of course.
+Build and bundle the static files with
+
+```npm run build```
+
+Finally, start the service by running
+
+```cd ../ && docker-compose up```
+
+This should result in http://riksdawgen:8080 in the front and http://riksdawgen:8080/api in the back. Endpoint example: http://riksdawgen:8080/api/hello.
+
+Kill the service with `Ctrl+C` and shut down the containers by `docker-compose down`.
