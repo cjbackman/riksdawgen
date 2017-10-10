@@ -1,7 +1,7 @@
 version: '3'
 services:
   web:
-     build: ./
+     build: ./front
      links: 
        - api:api
      ports:

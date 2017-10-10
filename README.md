@@ -5,11 +5,11 @@ Riksdawgen
 
 Add the following line to `/etc/host`
 
-```127.0.0.0 riksdawgen```
+```127.0.0.1 riksdawgen```
 
-Install all dependencies by
+Install all dependencies
 
-```npm install```
+```cd front/ && npm install```
 
 **Note:** if it fails, try `npm install -g webpack webpack-dev-server`.
 
@@ -19,6 +19,8 @@ Build and bundle the static files with
 
 Finally, start the service by running
 
-```docker-compose up```
+```cd ../ && docker-compose up```
 
 This should result in http://riksdawgen:8080 in the front and http://riksdawgen:8080/api in the back. Endpoint example: http://riksdawgen:8080/api/hello.
+
+Kill the service with `Ctrl+C` and shut down the containers by `docker-compose down`.
