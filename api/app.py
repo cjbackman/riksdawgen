@@ -1,14 +1,17 @@
+"""Test Python App"""
 from flask import Flask
 
-app = Flask(__name__)
+APP = Flask(__name__)
 
-@app.route("/api")
+@APP.route("/api")
 def welcome():
-	return "Welcome Riksdawgen's API! The end of the rainbow, where G&T brings you magic."
+    """Welcome Text"""
+    return "Welcome Riksdawgen's API! The end of the rainbow, where G&T brings you magic."
 
-@app.route("/api/hello")
+@APP.route("/api/hello")
 def hello():
+    """Returns Hello World"""
     return "Hello World"
 
 if __name__ == '__main__':
-	app.run()
+    APP.run()
