@@ -1,4 +1,5 @@
 node_modules/
 src/python/venv/
 *.DS_Store
+*.pyc
 dist/
