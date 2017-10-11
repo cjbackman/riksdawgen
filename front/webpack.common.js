@@ -3,12 +3,12 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: './front/index.html',
+  template: './src/index.html',
   inject: 'body'
 });
 
 module.exports = {
-    entry: ['babel-polyfill', './front/index.js'],
+    entry: ['babel-polyfill', './src/index.js'],
     output: {
       path: path.resolve('dist'),
       publicPath: '/',
