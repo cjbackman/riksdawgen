@@ -8,6 +8,7 @@ import { Content } from './Content.js';
 import { Footer } from './Footer.js';
 
 export const _Layout = ({showSidebar, location}) => {
+  console.log(process.env.NODE_ENV);
   return (
     <div className="page-wrapper">
       <div className="header">
