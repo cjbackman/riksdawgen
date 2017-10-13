@@ -10,12 +10,12 @@ class personlista:
 	base_url = 'http://data.riksdagen.se/personlista/?'
 
 	empty_filter = {'iid' : '',
-					'fnamn': '', 
-					'enamn': '', 
-					'f_ar' : '', 
-					'kn' : '', 
-					'parti' : '', 
-					'valkrets' : '', 
+					'fnamn': '',
+					'enamn': '',
+					'f_ar' : '',
+					'kn' : '',
+					'parti' : '',
+					'valkrets' : '',
 					'rdlstatus' : '',
 					'org' : '',
 					'utformat' : 'json',
@@ -23,9 +23,9 @@ class personlista:
 
 	def fetch_data(self, filt=empty_filter):
 
-		url = self.base_url + urllib.urlencode(filt)
+		url = self.base_url + urllib.parse.urlencode(filt)
 		r = requests.get(url)
-		
+
 		try:
 			fetched_data = json.loads(r.text)
 		except:
@@ -45,15 +45,15 @@ def example_app():
 	#raw_json = personlista.fetch_data(PL) # This would take some time...
 
 	# Filter data before requesting from data.riksdagen.se
-	filt = personlista.get_empty_filter() 
+	filt = personlista.get_empty_filter()
 
 	filt['fnamn'] = 'anna'
 	filt['kn']    = 'kvinna'
 
 	raw_json = personlista.fetch_data(PL, filt)
 
-	print raw_json
-	
+	print(raw_json)
+
 
 
 if __name__ == "__main__":
