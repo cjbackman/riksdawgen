@@ -2,15 +2,38 @@
 from flask import Flask
 from flask import jsonify
 from personlista import personlista
+from redis import StrictRedis
 
 
 APP = Flask(__name__)
 
-@APP.route("/api/personlista")
-def get_personlista():
+# Load configuration settings
+try:
+	APP.config.from_envvar('FLASK_SETTINGS')
+except:
+	# Use default settings if no settings specified.
+	APP.config['REDIS_SERVER'] = 'localhost'
+	# APP.config['DEBUG'] = True 
 
+REDIS = StrictRedis(host=APP.config['REDIS_SERVER'], port=6379, charset="utf-8", decode_responses=True)
+
+@APP.before_first_request
+def fetch_data():
 	PL = personlista()
-	return jsonify(personlista.fetch_data(PL))
+	personlista.fetch_data(PL)
+
+	filt_data = personlista.get_output_data(PL)
+	REDIS.hmset("personlista", filt_data)
+
+@APP.before_request
+def connect_to_data():
+	if REDIS.hexists("personlista","0") is False:
+		print("PL is None, forced to fetch new. This shall not happen.")
+		fetch_data()
+
+@APP.route("/api/personlista")
+def get_filt():
+	return jsonify(REDIS.hgetall("personlista"))
 
 @APP.route("/api")
 def welcome():
