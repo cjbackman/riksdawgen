@@ -16,5 +16,5 @@ RUN pip install -r requirements.txt
 ADD . /usr/src/app
 
 # run server
-ENTRYPOINT ["gunicorn", "-b", ":5000", "app:app"]
+ENTRYPOINT ["gunicorn", "-b", ":5000", "app:APP"]
 
