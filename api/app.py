@@ -33,12 +33,13 @@ def connect_to_data():
 
 @APP.route("/api/personlista")
 def get_filt():
-	return jsonify(REDIS.hgetall("personlista"))
+	personlista = REDIS.hgetall("personlista")
+	return jsonify(personlista['data'])
 
 @APP.route("/api")
 def welcome():
     """Welcome Text"""
-    return "Welcome Riksdawgen's API! The end of the rainbow, where G&T brings you magic."
+    return "Welcome Riksdawgen's API! The end of the rainbow, where G&T brings you magic." 
 
 @APP.route("/api/hello")
 def hello():
