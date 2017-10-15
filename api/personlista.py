@@ -51,7 +51,7 @@ class personlista:
 			person_list = self.raw_data['personlista']['person']
 		except:
 			print("Empty personlista")
-	
+
 		for i in range(0, len(person_list)):
 			p = person_list[i]
 			filt_data[str(i)] = {'efternamn'    : p['efternamn'],
@@ -88,4 +88,4 @@ def example_app():
 
 if __name__ == "__main__":
 	example_app()
-	
+
