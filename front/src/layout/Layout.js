@@ -6,9 +6,10 @@ import { Header } from './Header.js';
 import { Sidebar } from './Sidebar.js';
 import { Content } from './Content.js';
 import { Footer } from './Footer.js';
+import { Config } from '../config';
 
 export const _Layout = ({showSidebar, location}) => {
-  console.log(process.env.NODE_ENV);
+  console.log(Config.API_URL);
   return (
     <div className="page-wrapper">
       <div className="header">

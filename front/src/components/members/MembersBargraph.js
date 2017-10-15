@@ -1,23 +1,17 @@
 import React, { Component } from 'react';
-import api from '../../data/votes.json';
+import PropTypes from 'prop-types';
 import { Dropdown } from '../_shared/Dropdown.js';
 
 export class MembersBargraph extends Component {
   constructor() {
     super();
     this.state = {
-      votes: [],
       options: [
-        {value: 'AGE', label:'Ålder'},
+        { value: 'AGE', label:'Ålder'},
         { value: 'VOTES', label: 'Antal röster'}],
       selected: {}
     };
     this.handleChange = this.handleChange.bind(this);
-  }
-
-  componentDidMount() {
-    let votes = api.votering;
-    this.setState({ votes });
   }
 
   handleChange(selected) {
@@ -41,4 +35,9 @@ export class MembersBargraph extends Component {
       </div>
     );
   }
+}
+
+MembersBargraph.propTypes = {
+  isFetching: PropTypes.bool.isRequired,
+  members: PropTypes.array.isRequired,
 }

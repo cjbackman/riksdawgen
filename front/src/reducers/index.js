@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import { menu } from './menu';
+import { menuReducer } from './menuReducer';
+import { memberReducer } from './memberReducer';
 
 export const reducers = combineReducers({
-	menu
+  menu: menuReducer,
+  member: memberReducer
 });

@@ -27,6 +27,9 @@ export class Dropdown extends React.Component {
   }
 
   render() {
+    if (this.props.options.length === 0)
+      return null;
+
     const dropDownOptions = this.props.options.map(option => (
       <option
         key={option[this.props.valProp]}
