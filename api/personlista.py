@@ -30,7 +30,7 @@ class personlista:
 		r = requests.get(url)
 
 		try:
-			fetched_data = json.loads(r.text)
+			fetched_data = r.json();
 		except:
 			raise(ValueError('Non-json format received from url: %') % url)
 
@@ -45,7 +45,7 @@ class personlista:
 
 	def create_output_data(self):
 
-		filt_data = {}
+		filtered_entries = []
 
 		try:
 			person_list = self.raw_data['personlista']['person']
@@ -54,15 +54,16 @@ class personlista:
 	
 		for i in range(0, len(person_list)):
 			p = person_list[i]
-			filt_data[str(i)] = {'efternamn'    : p['efternamn'],
-								  	'parti'        : p['parti'],
-									'fodd_ar'      : p['fodd_ar'],
-									'bild_url_192' : p['bild_url_192'],
-									'kon'          : p['kon'],
-									'tilltalsnamn' : p['tilltalsnamn'],
-									'valkrets'     : p['valkrets']	}
+			filtered_entries.append({'efternamn'    : p['efternamn'],
+						 'parti'        : p['parti'],
+						 'fodd_ar'      : p['fodd_ar'],
+						 'bild_url_192' : p['bild_url_192'],
+						 'kon'          : p['kon'],
+						 'tilltalsnamn' : p['tilltalsnamn'],
+						 'valkrets'     : p['valkrets']})
 
-		self.output_data = filt_data
+		self.output_data = {'data' : filtered_entries};
+
 
 	def get_output_data(self):
 		return self.output_data
