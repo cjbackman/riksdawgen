@@ -15,6 +15,9 @@ RUN pip install -r requirements.txt
 # Add the app
 ADD . /usr/src/app
 
+# Settings
+ENV FLASK_SETTINGS flask_docker_settings.cfg
+
 # run server
-ENTRYPOINT ["gunicorn", "-b", ":5000", "app:app"]
+ENTRYPOINT ["gunicorn", "-b", ":5000", "app:APP"]
 

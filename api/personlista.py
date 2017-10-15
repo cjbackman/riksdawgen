@@ -21,6 +21,9 @@ class personlista:
 					'utformat' : 'json',
 					'termlista' : ''}
 
+	raw_data = {}
+	output_data = {}
+
 	def fetch_data(self, filt=empty_filter):
 
 		url = self.base_url + urllib.parse.urlencode(filt)
@@ -31,11 +34,38 @@ class personlista:
 		except:
 			raise(ValueError('Non-json format received from url: %') % url)
 
-		return fetched_data
+		self.raw_data = fetched_data
+		personlista.create_output_data(self)
+
+		return self.raw_data
 
 	@staticmethod
 	def get_empty_filter():
 		return personlista.empty_filter
+
+	def create_output_data(self):
+
+		filt_data = {}
+
+		try:
+			person_list = self.raw_data['personlista']['person']
+		except:
+			print("Empty personlista")
+	
+		for i in range(0, len(person_list)):
+			p = person_list[i]
+			filt_data[str(i)] = {'efternamn'    : p['efternamn'],
+								  	'parti'        : p['parti'],
+									'fodd_ar'      : p['fodd_ar'],
+									'bild_url_192' : p['bild_url_192'],
+									'kon'          : p['kon'],
+									'tilltalsnamn' : p['tilltalsnamn'],
+									'valkrets'     : p['valkrets']	}
+
+		self.output_data = filt_data
+
+	def get_output_data(self):
+		return self.output_data
 
 def example_app():
 
@@ -58,3 +88,4 @@ def example_app():
 
 if __name__ == "__main__":
 	example_app()
+	
