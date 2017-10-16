@@ -30,7 +30,7 @@ class personlista:
 		r = requests.get(url)
 
 		try:
-			fetched_data = r.json();
+			fetched_data = r.json()
 		except:
 			raise(ValueError('Non-json format received from url: %') % url)
 
@@ -62,7 +62,7 @@ class personlista:
 						 'tilltalsnamn' : p['tilltalsnamn'],
 						 'valkrets'     : p['valkrets']})
 
-		self.output_data = {'data' : filtered_entries};
+		self.output_data = {'persons' : filtered_entries};
 
 
 	def get_output_data(self):

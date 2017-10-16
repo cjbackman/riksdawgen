@@ -3,6 +3,7 @@ from flask import Flask
 from flask import jsonify
 from personlista import personlista
 from redis import StrictRedis
+import json
 
 
 APP = Flask(__name__)
@@ -23,18 +24,18 @@ def fetch_data():
 	personlista.fetch_data(PL)
 
 	filt_data = personlista.get_output_data(PL)
-	REDIS.hmset("personlista", filt_data)
+	REDIS.set("personlista",json.dumps(filt_data));
 
 @APP.before_request
 def connect_to_data():
-	if REDIS.hexists("personlista","0") is False:
+	if REDIS.exists("personlista") is False:
 		print("PL is None, forced to fetch new. This shall not happen.")
 		fetch_data()
 
 @APP.route("/api/personlista")
 def get_filt():
-	personlista = REDIS.hgetall("personlista")
-	return jsonify(personlista['data'])
+	personlista = REDIS.get("personlista")
+	return jsonify(json.loads(personlista))
 
 @APP.route("/api")
 def welcome():
