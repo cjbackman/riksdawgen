@@ -49,15 +49,15 @@
   }
 }
 
-.content::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 1.2em;
 }
 
-.content::-webkit-scrollbar-track-piece {
+::-webkit-scrollbar-track-piece {
   background-color: $scrollbar-background-color;
 }
 
-.content::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background-color: $scrollbar-color;
 }
 

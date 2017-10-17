@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchMembers } from '../actions/memberActions'
-import { MembersTable } from '../components/members/MembersTable';
+import { MembersTableContainer } from '../components/members/MembersTableContainer';
 import { MembersBargraph } from '../components/members/MembersBargraph';
 
 class _MembersPage extends React.Component {
@@ -18,7 +18,7 @@ class _MembersPage extends React.Component {
     return (
       <div className="content-wrapper">
         <div className="half">
-          <MembersTable members={this.props.members} isFetching={this.props.isFetching} />
+          <MembersTableContainer members={this.props.members} isFetching={this.props.isFetching} />
         </div>
         <div className="half">
           <MembersBargraph members={this.props.members} isFetching={this.props.isFetching} />

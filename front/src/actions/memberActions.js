@@ -24,12 +24,7 @@ export const fetchMembers = () => {
       error => console.log('An error occured.', error)
     )
     .then(json => {
-      console.log(json);
-      let members = [
-        { parti: 'S', tilltalsnamn: 'Janne' },
-        { parti: 'M', tilltalsnamn: 'Josef' }
-      ];
-      dispatch(receiveMembers(members))
+      dispatch(receiveMembers(json.persons))
     });
   }
 }

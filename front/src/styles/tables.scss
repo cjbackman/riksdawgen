@@ -3,16 +3,25 @@
   text-align: left;
   border-collapse:collapse;
   width: 100%;
-  th {
-    border-bottom: 1px solid white;
-  }
-  td {
-    a {
-      color:lightgrey;
-      font-weight: bold;
-      text-decoration: 'none';
+  thead {
+    tr {
+      th {
+        border-bottom: 1px solid white;
+      }
     }
   }
+  tbody {
+    tr {
+      td {
+        a {
+          color:lightgrey;
+          font-weight: bold;
+          text-decoration: 'none';
+        }
+      }
+    }
+  }
+
 }
 
 .select {
@@ -24,4 +33,29 @@
 
 .label {
   color: $text-color;
+}
+
+.text-input {
+  color: #fff;
+  background-color: $scrollbar-color;
+  border: 2px solid $scrollbar-background-color;
+  border-radius: .3rem;
+
+}
+
+::-webkit-input-placeholder {
+  color: #fff;
+  font-style: italic;
+}
+:-moz-placeholder {
+color: #fff;
+font-style: italic;
+}
+::-moz-placeholder {
+color: #fff;
+font-style: italic;
+}
+:-ms-input-placeholder {
+color: #fff;
+font-style: italic;
 }
