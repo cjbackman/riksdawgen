@@ -24,6 +24,7 @@
     "no-process-env":"off"
   },
   "globals": {
-    "process": false
+    "process": false,
+    "global": false
   }
 }
