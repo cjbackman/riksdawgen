@@ -60,7 +60,8 @@ class personlista:
 						 'bild_url_192' : p['bild_url_192'],
 						 'kon'          : p['kon'],
 						 'tilltalsnamn' : p['tilltalsnamn'],
-						 'valkrets'     : p['valkrets']})
+						 'valkrets'     : p['valkrets'],
+						 'intressent_id': p['intressent_id']})
 
 		self.output_data = {'persons' : filtered_entries};
 
