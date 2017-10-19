@@ -19,13 +19,11 @@ export const fetchMembers = () => {
     dispatch(requestMembers());
 
     return fetch(Config.API_URL + '/api/personlista')
-    .then(
-      response => response.json(),
-      error => console.log('An error occured.', error)
-    )
-    .then(json => {
-      dispatch(receiveMembers(json.persons))
-    });
+      .then(
+        response => response.json(),
+        error => console.log('An error occured.', error)
+      )
+      .then(json => dispatch(receiveMembers(json.persons)));
   }
 }
 
@@ -47,12 +45,10 @@ export const fetchMember = (id) => {
     dispatch(requestMember());
 
     return fetch(Config.API_URL + '/api/person/' + id)
-    .then(
-      response => response.json(),
-      error => console.log('An error occured.', error)
-    )
-    .then(json => {
-      dispatch(receiveMember(json))
-    });
+      .then(
+        response => response.json(),
+        error => console.log('An error occured.', error)
+      )
+      .then(json => dispatch(receiveMember(json)));
   }
 }
