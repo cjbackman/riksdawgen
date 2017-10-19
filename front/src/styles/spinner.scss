@@ -1,12 +1,13 @@
 .spinner {
   margin: 0 auto;
   text-align: center;
-  height: 3rem;
+  height: 1.5rem;
+  margin-top: 4rem;
 
   div {
     background-color: $text-color;
     height: 100%;
-    width: 0.4rem;
+    width: 0.2rem;
     margin: 0 0.1rem;
     display: inline-block;
     -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;

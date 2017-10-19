@@ -2,9 +2,6 @@
 @import './variables.scss';
 @import './layout.scss';
 @import './boxes.scss';
-@import './sidebar.scss';
-@import './footer.scss';
-@import './navbar.scss';
 @import './tables.scss';
 @import './spinner.scss';
 
@@ -27,4 +24,34 @@ ul {
 
 .pointer {
   cursor: pointer;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.pagination {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 100%;
+  margin: 1rem auto;
+  text-align: center;
+  ul {
+    list-style-type:none;
+    li {
+      margin: 0 0.5rem;
+      display:inline;
+      cursor:pointer;
+      &.active {
+        font-weight: bold;
+        text-decoration: underline;
+      }
+      &.disabled {
+        opacity:0;
+      }
+    }
+  }
+
 }

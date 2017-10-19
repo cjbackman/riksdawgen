@@ -1,37 +1,9 @@
-
-
-// $background-color: #17412D;
-// $box-color:#284D3B;
-
 .page-wrapper {
   display: flex;
   flex-flow: column;
   background: $background-color;
   min-height: 100vh;
-}
-
-.header {
-  background: $background-color;
-  z-index: 999;
-  position: fixed;
-  width: 100%;
-}
-
-.main {
-  display:flex;
-  margin-top: 4.5rem;
-}
-
-.sidebar {
-  min-width: 12rem;
-  width: 15%;
-
-  > div {
-    height: 100%;
-    min-width: 12rem;
-    width: 15%;
-    position: fixed;
-  }
+  margin-top: 5rem;
 }
 
 .hide {
@@ -47,18 +19,6 @@
     display: flex;
     flex-flow: column;
   }
-}
-
-::-webkit-scrollbar {
-  width: 1.2em;
-}
-
-::-webkit-scrollbar-track-piece {
-  background-color: $scrollbar-background-color;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: $scrollbar-color;
 }
 
 .content-wrapper {

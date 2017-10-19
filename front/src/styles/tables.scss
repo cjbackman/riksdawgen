@@ -1,5 +1,4 @@
 .table {
-  color: $text-color;
   text-align: left;
   border-collapse:collapse;
   width: 100%;
@@ -21,41 +20,4 @@
       }
     }
   }
-
-}
-
-.select {
-  color: #fff;
-  background-color: $scrollbar-color;
-  border: 2px solid $scrollbar-background-color;
-  border-radius: .3rem;
-}
-
-.label {
-  color: $text-color;
-}
-
-.text-input {
-  color: #fff;
-  background-color: $scrollbar-color;
-  border: 2px solid $scrollbar-background-color;
-  border-radius: .3rem;
-
-}
-
-::-webkit-input-placeholder {
-  color: #fff;
-  font-style: italic;
-}
-:-moz-placeholder {
-color: #fff;
-font-style: italic;
-}
-::-moz-placeholder {
-color: #fff;
-font-style: italic;
-}
-:-ms-input-placeholder {
-color: #fff;
-font-style: italic;
 }
