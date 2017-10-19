@@ -28,11 +28,25 @@ def fetch_data():
 	filt_data = personlista.get_output_data(PL)
 	REDIS.set("personlista",json.dumps(filt_data));
 
+	for p in filt_data['persons']:
+		REDIS.set(p['intressent_id'], json.dumps(p))
+		
+		
+
 @APP.before_request
 def connect_to_data():
 	if REDIS.exists("personlista") is False:
 		print("PL is None, forced to fetch new. This shall not happen.")
 		fetch_data()
+
+@APP.route('/api/person/<string:intressent_id>', methods=['GET'])
+def get_person(intressent_id):
+	person = REDIS.get(intressent_id)
+	
+	if(person is None):
+		person="{}"
+
+	return jsonify(json.loads(person))
 
 @APP.route("/api/personlista")
 def get_filt():
