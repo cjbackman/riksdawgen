@@ -15,11 +15,10 @@ Install all dependencies
 
 **Note:** On a Ubuntu system, this will probably fail as well. This worked on a Ubuntu 14.04 system
 
-`curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash --`
-
-`sudo apt-get install nodejs`
-
-`npm install`
+```
+curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash --
+sudo apt-get install nodejs
+npm install```
 
 Build and bundle the static files with
 
