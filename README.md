@@ -18,7 +18,8 @@ Install all dependencies
 ```
 curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash --
 sudo apt-get install nodejs
-npm install```
+npm install
+```
 
 Build and bundle the static files with
 
