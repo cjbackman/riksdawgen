@@ -7,11 +7,9 @@ Add the following line to `/etc/host`
 
 ```127.0.0.1 riksdawgen```
 
-Install all dependencies
+Install all dependencies (if this step fails, follow the instructions at the end of this README)
 
 ```cd front/ && npm install```
-
-If this fails, follow the steps at the end of this README.
 
 Build and bundle the static files with
 
