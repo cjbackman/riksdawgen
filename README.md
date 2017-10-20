@@ -11,6 +11,8 @@ Install all dependencies
 
 ```cd front/ && npm install```
 
+If this fails, follow the steps at the end of this README.
+
 Build and bundle the static files with
 
 ```npm run build```
@@ -23,7 +25,7 @@ This should result in http://riksdawgen:8080 in the front and http://riksdawgen:
 
 Kill the service with `Ctrl+C` and shut down the containers by `docker-compose down`.
 
-## If npm install fails
+## If `npm install` fails
 
 First, try 
 
