@@ -21,6 +21,7 @@ export class MembersBargraph extends Component {
   render() {
     return (
       <div>
+        <h3 style={{borderBottom: '1px solid'}}>En smutt graf</h3>
         <div>
           <label className="label">Sveriges riksdag efter: </label>
           <Dropdown

@@ -1,27 +1,23 @@
 .table {
-  color: $text-color;
   text-align: left;
   border-collapse:collapse;
   width: 100%;
-  th {
-    border-bottom: 1px solid white;
-  }
-  td {
-    a {
-      color:lightgrey;
-      font-weight: bold;
-      text-decoration: 'none';
+  thead {
+    tr {
+      th {
+        border-bottom: 1px solid white;
+      }
     }
   }
-}
-
-.select {
-  color: #fff;
-  background-color: $scrollbar-color;
-  border: 2px solid $scrollbar-background-color;
-  border-radius: .3rem;
-}
-
-.label {
-  color: $text-color;
+  tbody {
+    tr {
+      td {
+        a {
+          color:lightgrey;
+          font-weight: bold;
+          text-decoration: 'none';
+        }
+      }
+    }
+  }
 }
