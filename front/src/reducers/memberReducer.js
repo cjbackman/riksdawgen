@@ -6,7 +6,7 @@ import {
   } from '../actions/actionTypes.js'
 
 export const memberReducer = (state = {
-  member: {},
+  member: null,
 	members: [],
 	isFetching: false
 },
