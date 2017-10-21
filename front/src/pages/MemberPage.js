@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { MemberInfo } from '../components/member/MemberInfo';
 import { Spinner } from '../components/_shared/Spinner';
 import { fetchMember } from '../actions/memberActions';
+import { MemberGraph } from '../components/member/MemberGraph';
 
 export class _MemberPage extends React.Component {
   constructor(props) {
@@ -11,6 +12,7 @@ export class _MemberPage extends React.Component {
   }
 
   componentDidMount() {
+
     const { memberId } = this.props;
     this.props.fetchMember(memberId);
   }
@@ -19,8 +21,11 @@ export class _MemberPage extends React.Component {
     return (
       this.props.isFetching || !this.props.member ? <Spinner/> :
       <div className="content-wrapper">
-        <div className="whole">
+        <div className="one-third">
           <MemberInfo member={this.props.member} />
+        </div>
+        <div className="two-thirds">
+          <MemberGraph member={this.props.member} />
         </div>
       </div>
     )
@@ -31,7 +36,7 @@ _MemberPage.propTypes = {
   memberId: PropTypes.string.isRequired,
   fetchMember: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  member: PropTypes.object.isRequired,
+  member: PropTypes.object,
 };
 
 const mapStateToProps = (state, ownProps) => ({

@@ -1,10 +1,15 @@
-.box, .half, .oneThird, .twoThirds, .quarter, .whole {
-  box-sizing: border-box;
-  border-radius: 1.5rem;
-  border: 3rem solid transparent;
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.half, .oneThird, .twoThirds, .quarter, .whole {
+.box, .half, .one-third, .two-thirds, .quarter, .whole {
+  border-radius: 0.5rem;
+  border: 1rem solid transparent;
+  box-sizing: border-box;
+}
+
+.half, .one-third, .two-thirds, .quarter, .whole {
   width: 100%;
   justify-content: space-between;
 }
@@ -19,11 +24,11 @@
     width: 50%;
     justify-content: space-between;
   }
-  .oneThird {
+  .one-third {
     width: 33%;
     justify-content: space-between;
   }
-  .twoThirds {
+  .two-thirds {
     width: 67%;
     justify-content: space-between;
   }
