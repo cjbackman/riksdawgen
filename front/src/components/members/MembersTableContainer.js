@@ -4,14 +4,14 @@ import  { MembersTable } from './MembersTable';
 import { TextInput } from '../_shared/TextInput';
 import { Dropdown } from '../_shared/Dropdown';
 import { Pagination } from '../_shared/Pagination';
+import { Parties } from '../../data';
 
-const partyOptions =  [{ value: '', label: 'Alla'}, { value: 's', label: 'Sossarna'}, { value: 'm', label: 'Brackorna'}];
+const partyOptions = [{ value:'', label: 'Alla'}, ...Parties];
 
 export class MembersTableContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      filteredMembers: [],
       pagedMembers: [],
       searchText: '',
       selectedParty: {}
@@ -21,25 +21,13 @@ export class MembersTableContainer extends React.Component {
     this.onChangePage = this.onChangePage.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { members } = nextProps;
-    this.setState({ filteredMembers: members });
-  }
-
-  filterMembers() {
-    let filteredMembers = this.props.members
-      .filter(m => (m.firstname.toLowerCase().includes(this.state.searchText) || m.lastname.toLowerCase().includes(this.state.searchText)) &&
-      (!this.state.selectedParty.value || this.state.selectedParty.value === m.party.toLowerCase()));
-    this.setState({ filteredMembers });
-  }
-
   onNameChanged(text) {
     let searchText = text.toLowerCase();
-    this.setState({ searchText }, () => this.filterMembers());
+    this.setState({ searchText });
   }
 
   onPartyChanged(selectedParty) {
-    this.setState({ selectedParty }, () => this.filterMembers());
+    this.setState({ selectedParty });
   }
 
   onChangePage(pagedMembers) {
@@ -47,6 +35,9 @@ export class MembersTableContainer extends React.Component {
   }
 
   render() {
+    let filteredMembers = this.props.members.filter(m => m.name.toLowerCase().includes(this.state.searchText) &&
+    (!this.state.selectedParty.value || this.state.selectedParty.value === m.party.toLowerCase()));
+
     return (
       <div>
         <h3 style={{borderBottom: '1px solid'}}>Ledamöter</h3>
@@ -58,7 +49,7 @@ export class MembersTableContainer extends React.Component {
         </label>
         <div style={{ marginTop: '1rem' }}>
           <MembersTable members={this.state.pagedMembers} />
-          <Pagination items={this.state.filteredMembers} onChangePage={this.onChangePage} pageSize={15} />
+          <Pagination items={filteredMembers} onChangePage={this.onChangePage} pageSize={15} />
         </div>
       </div>
     );
