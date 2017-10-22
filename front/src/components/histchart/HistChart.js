@@ -99,8 +99,8 @@ class HistChart extends Component {
          .attr("class", "axis axis--x")
          .attr("transform", `translate(0,${this.props.size[1]})`)
          .call(axisBottom(x))
-
-render() {
+   }
+   render() {
       return '<svg ref={node => this.node = node} width={500} height={500}></svg>'
    }
 }
