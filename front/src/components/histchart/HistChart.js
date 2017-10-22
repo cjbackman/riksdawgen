@@ -18,17 +18,16 @@ export class HistChart extends Component {
     this.createHistChart()
   }
   createHistChart() {
-    const t = transition().duration(1000);
+    const t = transition().duration(500);
     const dimension = this.props.dimension;
-
     const node = this.node
 
-    const dataMax = max(this.props.data, d => d[dimension])
+    const maxValue =  max(this.props.data, d => d[dimension]);
     const x = scaleLinear()
-      .domain([0, dataMax])
+      .domain([0, maxValue])
       .range([0, this.props.size[0]])
 
-    const nbins = 20
+    const nbins = 30
     const _histogram = histogram()
       .domain(x.domain())
       .thresholds(x.ticks(nbins))
@@ -37,14 +36,15 @@ export class HistChart extends Component {
     const bins = _histogram(this.props.data)
 
     // Add a g container for each bin
-    let binContainer = select(node).selectAll(".gBin").data(bins);
+    let binContainer = select(node)
+      .selectAll("g")
+      .data(bins);
     // Remove old containers
     binContainer.exit().remove()
 
     // Add new containers
     let binContainerEnter = binContainer.enter()
       .append("g")
-      .attr("class", "gBin")
       .attr("transform", d => `translate(${x(d.x0)}, ${this.props.size[1]})`)
 
     // Populate the bin containers with data
@@ -62,13 +62,15 @@ export class HistChart extends Component {
       .attr("class", "mp-circle")
       .attr("cx", 0) //g element already at correct x pos
       .attr("cy", d => - d.idx * 2 * d.radius - d.radius)
-      .attr("r", 8)
+      .transition(t)
+      .attr("r", d => d.radius);
 
     binContainerEnter.merge(binContainer)
       .attr("transform", d => `translate(${x(d.x0)}, ${this.props.size[1]})`)
 
     // Enter/update/exit for circles, inside each container
-    let dots = binContainer.selectAll("circle")
+    let dots = binContainer
+      .selectAll("circle")
       .data(d => d.map((p, i) => {
         return {
           idx: i,
@@ -85,16 +87,16 @@ export class HistChart extends Component {
       .attr("r", 0)
       .remove();
 
-    // Update existing elements
-    //dots.attr("class", "update");
-
     // Add new dots found in data
     dots.enter()
       .append("circle")
-      .attr("cx", 0) //g element already at correct x pos
+      .attr("class", "mp-circle")
+      .attr("cx", 0)
       .attr("cy", d => - d.idx * 2 * d.radius - d.radius)
-      .attr("r", 8)
       .merge(dots)
+      .transition(t)
+      .attr("r", d => d.radius);
+
 
     //Add x axis
     select(node)
@@ -106,7 +108,7 @@ export class HistChart extends Component {
 
   render() {
     return (
-      <svg ref={node => this.node = node} width={500} height={500}></svg>
+      <svg ref={node => this.node = node} width={350} height={350}></svg>
     );
   }
 }

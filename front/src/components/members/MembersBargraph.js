@@ -9,9 +9,8 @@ export class MembersBargraph extends Component {
     super();
     this.state = {
       options: [
-        { value: 'age', label:'Ålder'},
-        { value: 'born_year', label: 'Födelseår'},
-        { value: 'party', label: 'Parti'}
+        { value: 'age', label:'Ålder' },
+        { value: 'party', label: 'Parti'},
       ],
       selected: {}
     };
@@ -36,7 +35,12 @@ export class MembersBargraph extends Component {
         </div>
         <div style={{ marginTop: '2rem', width: '100%', margin: '0 auto', textAlign: 'center' }}>
           { !this.state.selected.value ? <Spinner/> :
-            <HistChart dimension={this.state.selected.value} size={[300,300]} data={this.props.members} />
+            <HistChart
+              dimension={this.state.selected.value}
+              from={this.state.selected.from}
+              to={this.state.selected.to}
+              size={[300,300]}
+              data={this.props.members} />
           }
         </div>
       </div>
