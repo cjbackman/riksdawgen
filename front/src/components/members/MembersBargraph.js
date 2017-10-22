@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Dropdown } from '../_shared/Dropdown.js';
+import { HistChart } from '../histchart/HistChart';
+import { Spinner } from '../_shared/Spinner';
 
 export class MembersBargraph extends Component {
   constructor() {
     super();
     this.state = {
       options: [
-        { value: 'AGE', label:'Ålder'},
-        { value: 'VOTES', label: 'Antal röster'}],
+        { value: 'age', label:'Ålder'},
+        { value: 'born_year', label: 'Födelseår'},
+        { value: 'party', label: 'Parti'}
+      ],
       selected: {}
     };
     this.handleChange = this.handleChange.bind(this);
@@ -30,8 +34,10 @@ export class MembersBargraph extends Component {
             labelProp='label'
             handleChange={this.handleChange}/>
         </div>
-        <div>
-          { this.state.selected.label }
+        <div style={{ marginTop: '2rem', width: '100%', margin: '0 auto', textAlign: 'center' }}>
+          { !this.state.selected.value ? <Spinner/> :
+            <HistChart dimension={this.state.selected.value} size={[300,300]} data={this.props.members} />
+          }
         </div>
       </div>
     );
