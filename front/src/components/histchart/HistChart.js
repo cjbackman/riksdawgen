@@ -89,7 +89,7 @@ class HistChart extends Component {
       dots.enter()
       .append("circle")
         .attr("cx", 0) //g element already at correct x pos
-        .attr("cy", d => return - d.idx * 2 * d.radius - d.radius)
+        .attr("cy", d => - d.idx * 2 * d.radius - d.radius)
         .attr("r", 0)
       .merge(dots)
 
