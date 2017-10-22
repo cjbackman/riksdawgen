@@ -28,8 +28,8 @@ export class MembersTableContainer extends React.Component {
 
   filterMembers() {
     let filteredMembers = this.props.members
-      .filter(m => (m.tilltalsnamn.toLowerCase().includes(this.state.searchText) || m.efternamn.toLowerCase().includes(this.state.searchText)) &&
-      (!this.state.selectedParty.value || this.state.selectedParty.value === m.parti.toLowerCase()));
+      .filter(m => (m.firstname.toLowerCase().includes(this.state.searchText) || m.lastname.toLowerCase().includes(this.state.searchText)) &&
+      (!this.state.selectedParty.value || this.state.selectedParty.value === m.party.toLowerCase()));
     this.setState({ filteredMembers });
   }
 

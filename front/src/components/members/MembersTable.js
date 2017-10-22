@@ -8,7 +8,7 @@ export const MembersTable = ({ members }) => (
         <thead>
           <tr>
             <th>Namn</th>
-            <th>Födelseår</th>
+            <th>Ålder</th>
             <th>Parti</th>
             <th>Valkrets</th>
           </tr>
@@ -18,10 +18,10 @@ export const MembersTable = ({ members }) => (
             <tr key={index}>
               <td>
                 <Link to={`/members/${member.member_id}`}>
-                  {member.name + ' ' + member.lastname}
+                  {member.name}
                 </Link>
               </td>
-              <td>{member.fodd_ar}</td>
+              <td>{member.age}</td>
               <td>
                 <Link to={`/party/${member.party.toLowerCase()}`}>
                   {member.party}
