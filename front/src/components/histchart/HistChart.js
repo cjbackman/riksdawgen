@@ -96,6 +96,7 @@ export class HistChart extends Component {
       .attr("r", 8)
       .merge(dots)
 
+<<<<<<< HEAD
     //Add x axis
     select(node)
       .append('g')
@@ -109,6 +110,18 @@ export class HistChart extends Component {
       <svg ref={node => this.node = node} width={500} height={500}></svg>
     );
   }
+=======
+      //Add x axis
+      select(node)
+         .append('g')
+         .attr("class", "axis axis--x")
+         .attr("transform", `translate(0,${this.props.size[1]})`)
+         .call(axisBottom(x))
+   }
+   render() {
+      return '<svg ref={node => this.node = node} width={500} height={500}></svg>'
+   }
+>>>>>>> origin/feature-histchart
 }
 
 HistChart.propTypes = {
