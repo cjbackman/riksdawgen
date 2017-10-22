@@ -7,8 +7,7 @@ export const MembersTable = ({ members }) => (
       <table className="table">
         <thead>
           <tr>
-            <th>Förnamn</th>
-            <th>Efternamn</th>
+            <th>Namn</th>
             <th>Födelseår</th>
             <th>Parti</th>
             <th>Valkrets</th>
@@ -18,14 +17,17 @@ export const MembersTable = ({ members }) => (
           {members.map((member, index) =>
             <tr key={index}>
               <td>
-                <Link to={`/members/${member.intressent_id}`}>
-                  {member.tilltalsnamn}
+                <Link to={`/members/${member.member_id}`}>
+                  {member.name + ' ' + member.lastname}
                 </Link>
               </td>
-              <td>{member.efternamn}</td>
               <td>{member.fodd_ar}</td>
-              <td>{member.parti}</td>
-              <td>{member.valkrets}</td>
+              <td>
+                <Link to={`/party/${member.party.toLowerCase()}`}>
+                  {member.party}
+                </Link>
+              </td>
+              <td>{member.constituency}</td>
             </tr>
           )}
         </tbody>
