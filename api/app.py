@@ -2,7 +2,7 @@
 from flask import Flask
 from flask import jsonify
 from flask_cors import CORS, cross_origin
-from personlista import personlista
+from members import members
 from redis import StrictRedis
 import json
 
@@ -12,51 +12,56 @@ CORS(APP)
 
 # Load configuration settings
 try:
-	APP.config.from_envvar('FLASK_SETTINGS')
+    APP.config.from_envvar('FLASK_SETTINGS')
 except:
-	# Use default settings if no settings specified.
-	APP.config['REDIS_SERVER'] = 'localhost'
-	# APP.config['DEBUG'] = True
+    # Use default settings if no settings specified.
+    APP.config['REDIS_SERVER'] = 'localhost'
+    # APP.config['DEBUG'] = True
 
-REDIS = StrictRedis(host=APP.config['REDIS_SERVER'], port=6379, charset="utf-8", decode_responses=True)
+REDIS = StrictRedis(host=APP.config[
+                    'REDIS_SERVER'], port=6379, charset="utf-8", decode_responses=True)
+
 
 @APP.before_first_request
 def fetch_data():
-	PL = personlista()
-	personlista.fetch_data(PL)
+    MP = members()
+    members.fetch_data(MP)
 
-	filt_data = personlista.get_output_data(PL)
-	REDIS.set("personlista",json.dumps(filt_data));
+    filt_data = members.get_output_data(MP)
+    REDIS.set("members", json.dumps(filt_data))
 
-	for p in filt_data['persons']:
-		REDIS.set(p['intressent_id'], json.dumps(p))
-		
-		
+    for p in filt_data['members']:
+        REDIS.set(p['member_id'], json.dumps(p))
+
 
 @APP.before_request
 def connect_to_data():
-	if REDIS.exists("personlista") is False:
-		print("PL is None, forced to fetch new. This shall not happen.")
-		fetch_data()
+    if REDIS.exists("members") is False:
+        print("MP is None, forced to fetch new. This shall not happen.")
+        fetch_data()
 
-@APP.route('/api/person/<string:intressent_id>', methods=['GET'])
-def get_person(intressent_id):
-	person = REDIS.get(intressent_id)
-	
-	if(person is None):
-		person="{}"
 
-	return jsonify(json.loads(person))
+@APP.route('/api/member/<string:member_id>', methods=['GET'])
+def get_member(member_id):
+    member = REDIS.get(member_id)
 
-@APP.route("/api/personlista")
+    if(member is None):
+        member = "{}"
+
+    return jsonify(json.loads(member))
+
+
+@APP.route("/api/members")
 def get_filt():
-	personlista = REDIS.get("personlista")
-	return jsonify(json.loads(personlista))
+    members_list = REDIS.get("members")
+    return jsonify(json.loads(members_list))
+
 
 @APP.route("/api")
 def welcome():
     """Welcome Text"""
-    return "Welcome Riksdawgen's API! The end of the rainbow, where G&T brings you magic." 
+    return "Welcome Riksdawgen's API! The end of the rainbow, where G&T brings you magic."
+
 
 @APP.route("/api/hello")
 def hello():
@@ -66,5 +71,3 @@ def hello():
 # Do not use flask server in production...
 if __name__ == '__main__':
     APP.run(debug=True)
-
-

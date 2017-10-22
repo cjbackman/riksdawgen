@@ -18,14 +18,14 @@ export const MembersTable = ({ members }) => (
           {members.map((member, index) =>
             <tr key={index}>
               <td>
-                <Link to={`/members/${member.intressent_id}`}>
-                  {member.tilltalsnamn}
+                <Link to={`/member/${member.member_id}`}>
+                  {member.name}
                 </Link>
               </td>
-              <td>{member.efternamn}</td>
-              <td>{member.fodd_ar}</td>
-              <td>{member.parti}</td>
-              <td>{member.valkrets}</td>
+              <td>{member.lastname}</td>
+              <td>{member.born_year}</td>
+              <td>{member.party}</td>
+              <td>{member.constituency}</td>
             </tr>
           )}
         </tbody>
