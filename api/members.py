@@ -61,7 +61,8 @@ class members:
                                      'born_year': p['fodd_ar'],
                                      'image': p['bild_url_192'],
                                      'gender': p['kon'],
-                                     'name': p['tilltalsnamn'],
+                                     'firstname': p['tilltalsnamn'],
+                                     'name': p['tilltalsnamn'] + ' ' + p['efternamn'],
                                      'constituency': p['valkrets'],
                                      'member_id': p['intressent_id'],
                                      'age': datetime.now().year - int(p['fodd_ar'])})

@@ -18,7 +18,7 @@ export const MembersTable = ({ members }) => (
             <tr key={index}>
               <td>
                 <Link to={`/members/${member.member_id}`}>
-                  {member.name + ' ' + member.lastname}
+                  {member.name}
                 </Link>
               </td>
               <td>{member.age}</td>

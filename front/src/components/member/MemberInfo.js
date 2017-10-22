@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export const MemberInfo = ({ member }) => (
   <div>
-    <h3 style={{ borderBottom: '1px solid' }}>{member.name + ' ' + member.lastname}</h3>
+    <h3 style={{ borderBottom: '1px solid' }}>{member.name}</h3>
     <div className="wrapper">
       <div className="half">
         <img src={member.image} />
@@ -11,7 +11,7 @@ export const MemberInfo = ({ member }) => (
       <div className="half">
         <div>
           <label style={{ marginRight: '10px' }}>
-            Födelseår:  {member.born_year}
+            År:  {member.age}
           </label>
         </div>
         <div>
