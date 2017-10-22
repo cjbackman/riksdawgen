@@ -17,17 +17,17 @@ export const MembersTable = ({ members }) => (
           {members.map((member, index) =>
             <tr key={index}>
               <td>
-                <Link to={`/members/${member.intressent_id}`}>
-                  {member.tilltalsnamn + ' ' + member.efternamn}
+                <Link to={`/members/${member.member_id}`}>
+                  {member.name + ' ' + member.lastname}
                 </Link>
               </td>
               <td>{member.fodd_ar}</td>
               <td>
-                <Link to={`/party/${member.parti.toLowerCase()}`}>
-                  {member.parti}
+                <Link to={`/party/${member.party.toLowerCase()}`}>
+                  {member.party}
                 </Link>
               </td>
-              <td>{member.valkrets}</td>
+              <td>{member.constituency}</td>
             </tr>
           )}
         </tbody>
