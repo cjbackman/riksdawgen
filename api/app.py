@@ -50,7 +50,8 @@ def fetch_data():
     REDIS.set("members", json.dumps(filt_data))
 
     for p in filt_data['members']:
-        REDIS.set(p['member_id'], json.dumps(p))
+        member_data = members.get_member_data(MP, p['member_id'])
+        REDIS.set(p['member_id'], json.dumps(member_data))
 
 
 @APP.before_request
