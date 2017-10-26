@@ -1,77 +1,16 @@
 @import url(https://fonts.googleapis.com/css?family=Quicksand);
-@import './variables.scss';
-@import './layout.scss';
-@import './boxes.scss';
-@import './tables.scss';
+@import '~bulma/bulma';
 @import './spinner.scss';
+@import './d3.scss';
 
-html, body, ul, li {
-  margin: 0;
-  padding: 0;
-  font-size: 1rem;
+html, body {
   font-family: 'Quicksand';
 }
 
-ul {
-  list-style-type:none;
+.is-invisible {
+  visibility: hidden;
 }
 
-.icon {
-  height: 2rem;
-  width: 2rem;
-  color: $icon-color;
-}
-
-.pointer {
-  cursor: pointer;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.pagination {
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  width: 100%;
-  margin: 1rem auto;
-  text-align: center;
-  ul {
-    list-style-type:none;
-    li {
-      margin: 0 0.5rem;
-      display:inline;
-      cursor:pointer;
-      &.active {
-        font-weight: bold;
-        text-decoration: underline;
-      }
-      &.disabled {
-        opacity:0;
-      }
-    }
-  }
-
-}
-
-.mp-circle {
-  fill:darkslategray;
-}
-
-.enter {
-  fill: #EDCA3A;
-}
-
-.update {
-  fill: #1FBAD6;
-}
-
-.exit {
-  fill: lightgrey;
-}
-
-.selected {
-  fill: #E6B0F1;
+.subtitle {
+  border-bottom: 1px solid black;
 }

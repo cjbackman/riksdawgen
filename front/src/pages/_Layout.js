@@ -7,13 +7,15 @@ import { ErrorPage } from './ErrorPage.js';
 
 export const Layout = () => {
   return (
-    <div className="page-wrapper">
-       <Switch>
-        <Route exact path='/' component={MembersPage} />
-        <Route path='/members/:id' component={MemberPage} />
-        <Route path='/party/:id' component={PartyPage} />
-        <Route component={ErrorPage} />
-      </Switch>
-    </div>
+    <section className="section">
+      <div className="container">
+        <Switch>
+          <Route exact path='/' component={MembersPage} />
+          <Route path='/members/:id' component={MemberPage} />
+          <Route path='/party/:id' component={PartyPage} />
+          <Route component={ErrorPage} />
+        </Switch>
+      </div>
+    </section>
   )
 };

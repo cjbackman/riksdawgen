@@ -42,7 +42,6 @@ export class Dropdown extends React.Component {
 
     return (
       <select
-        className="select"
         value={value}
         onChange={this.handleChange}>
         {dropDownOptions}

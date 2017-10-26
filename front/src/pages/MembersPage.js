@@ -13,11 +13,13 @@ class _MembersPage extends React.Component {
   render() {
     return (
       this.props.isFetching ? <Spinner /> :
-      <div className="content-wrapper">
-        <div className="half">
+      <div className="columns">
+        <div className="column">
+          <h2 className="subtitle border-bottom">Ledamöter</h2>
           <MembersTableContainer members={this.props.members} isFetching={this.props.isFetching} />
         </div>
-        <div className="half">
+        <div className="column">
+          <h2 className="subtitle border-bottom">En smutt graf</h2>
           <MembersBargraph members={this.props.members} isFetching={this.props.isFetching} />
         </div>
       </div>

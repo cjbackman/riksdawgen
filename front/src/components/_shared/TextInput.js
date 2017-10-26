@@ -18,7 +18,7 @@ export class TextInput extends React.Component {
   render() {
     return (
       <input
-        className="text-input"
+        className="input"
         type="text"
         placeholder={this.props.placeholder}
         value={this.state.text}

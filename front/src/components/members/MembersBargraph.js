@@ -9,8 +9,8 @@ export class MembersBargraph extends Component {
     super();
     this.state = {
       options: [
-        { value: 'age', label:'Ålder' },
-        { value: 'party', label: 'Parti'},
+        { value: 'age', label: 'Ålder' },
+        // { value: 'party', label: 'Parti'},
       ],
       selected: {}
     };
@@ -18,28 +18,31 @@ export class MembersBargraph extends Component {
   }
 
   handleChange(selected) {
-    this.setState({selected});
+    this.setState({ selected });
   }
 
   render() {
     return (
       <div>
-        <h3 style={{borderBottom: '1px solid'}}>En smutt graf</h3>
-        <div>
-          <label className="label">Sveriges riksdag efter: </label>
-          <Dropdown
-            options={this.state.options}
-            valProp='value'
-            labelProp='label'
-            handleChange={this.handleChange}/>
+        <div className="field">
+          <label className="label">Sortera efter</label>
+          <div className="control">
+            <div className="select">
+              <Dropdown
+                options={this.state.options}
+                valProp='value'
+                labelProp='label'
+                handleChange={this.handleChange} />
+            </div>
+          </div>
         </div>
-        <div style={{ marginTop: '2rem', width: '100%', margin: '0 auto', textAlign: 'center' }}>
-          { !this.state.selected.value ? <Spinner/> :
+        <div className="has-text-centered">
+          {!this.state.selected.value ? <Spinner /> :
             <HistChart
               dimension={this.state.selected.value}
               from={this.state.selected.from}
               to={this.state.selected.to}
-              size={[300,300]}
+              size={[300, 300]}
               data={this.props.members} />
           }
         </div>

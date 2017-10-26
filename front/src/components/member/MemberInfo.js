@@ -3,26 +3,23 @@ import PropTypes from 'prop-types';
 
 export const MemberInfo = ({ member }) => (
   <div>
-    <h3 style={{ borderBottom: '1px solid' }}>{member.name}</h3>
-    <div className="wrapper">
-      <div className="half">
+    <h2 className="subtitle">{member.name}</h2>
+    <div className="columns">
+      <div className="column">
         <img src={member.image} />
       </div>
-      <div className="half">
-        <div>
-          <label style={{ marginRight: '10px' }}>
-            År:  {member.age}
-          </label>
+      <div className="column">
+        <div className="field is-grouped">
+          <label className="label control">År</label>
+          <p className="control">{member.age}</p>
         </div>
-        <div>
-          <label style={{ marginRight: '10px' }}>
-            Parti:  {member.party}
-          </label>
+        <div className="field is-grouped">
+          <label className="label control">Parti</label>
+          <p className="control">{member.party}</p>
         </div>
-        <div>
-          <label style={{ marginRight: '10px' }}>
-            Valkrets: {member.constituency}
-          </label>
+        <div className="field is-grouped">
+          <label className="label control">Valkrets</label>
+          <p className="control">{member.constituency}</p>
         </div>
       </div>
     </div>

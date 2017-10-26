@@ -20,11 +20,11 @@ export class _MemberPage extends React.Component {
   render() {
     return (
       this.props.isFetching || !this.props.member ? <Spinner/> :
-      <div className="content-wrapper">
-        <div className="one-third">
+      <div className="columns">
+        <div className="column is-one-third">
           <MemberInfo member={this.props.member} />
         </div>
-        <div className="two-thirds">
+        <div className="column is-two-thirds">
           <MemberGraph member={this.props.member} />
         </div>
       </div>
