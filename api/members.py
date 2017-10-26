@@ -4,6 +4,7 @@
 import requests
 import json
 import urllib
+import copy
 from datetime import datetime
 
 
@@ -23,8 +24,9 @@ class members:
                     'utformat': 'json',
                     'termlista': ''}
 
-    raw_data = {}
-    output_data = {}
+    raw_data = {}    # Raw json-blob from data.riksdagen.se
+    output_data = {} # Json structure with basic info for all members
+    member_data = {} # {member_id : detalied data} - key:value pair
 
     def fetch_data(self, filt=empty_filter):
 
@@ -56,22 +58,62 @@ class members:
 
         for i in range(0, len(members_list)):
             p = members_list[i]
-            filtered_entries.append({'lastname': p['efternamn'],
-                                     'party': p['parti'],
-                                     'born_year': p['fodd_ar'],
-                                     'image': p['bild_url_192'],
-                                     'gender': p['kon'],
-                                     'firstname': p['tilltalsnamn'],
-                                     'name': p['tilltalsnamn'] + ' ' + p['efternamn'],
-                                     'constituency': p['valkrets'],
-                                     'member_id': p['intressent_id'],
-                                     'age': datetime.now().year - int(p['fodd_ar'])})
+            member_id = p['intressent_id']
 
+            member_data = {'lastname': p['efternamn'],
+                           'party': p['parti'],
+                           'born_year': p['fodd_ar'],
+                           'image': p['bild_url_192'],
+                           'gender': p['kon'],
+                           'firstname': p['tilltalsnamn'],
+                           'name': p['tilltalsnamn'] + ' ' + p['efternamn'],
+                           'constituency': p['valkrets'],
+                           'member_id': member_id,
+                           'age': datetime.now().year - int(p['fodd_ar'])}
+
+            # Append basic data
+            assignments, assignment_count = self.create_assignment_data(p)
+            member_data['assignment_count'] = assignment_count
+
+            filtered_entries.append(copy.deepcopy(member_data))
+
+            # Store detailed member data
+            member_data['assignments'] = assignments
+            self.member_data[member_id] = member_data
+
+        # Store list of basic members data
         self.output_data = {'members': filtered_entries}
+
+    def create_assignment_data(self, member_data):
+
+        filtered_assignments = []
+
+        member_id = member_data['intressent_id']
+        assignment_list = member_data['personuppdrag']['uppdrag']
+
+        for i in range(0, len(assignment_list)):
+            a = assignment_list[i]
+
+            function = a['uppgift'][0]
+            if not isinstance(function, str):
+                function = ''
+
+            filtered_assignments.append({'role_code'     : a['roll_kod'],
+                                        'status'         : a['status'],
+                                        'type'           : a['typ'],
+                                        'start_date'     : a['from'],
+                                        'end_date'       : a['tom'],
+                                        'authority_code' : a['organ_kod'],
+                                        'ordinal_number' : int(a['ordningsnummer']),
+                                        'function'       : function})
+
+        return filtered_assignments, len(assignment_list)
 
     def get_output_data(self):
         return self.output_data
 
+    def get_member_data(self, member_id):
+        return self.member_data[member_id]
 
 def example_app():
 
