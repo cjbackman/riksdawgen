@@ -1,9 +1,10 @@
-import { REQUEST_MEMBERS, RECEIVE_MEMBERS, REQUEST_MEMBER, RECEIVE_MEMBER } from './actionTypes';
-import { Config } from '../config';
+import fetch from 'isomorphic-fetch'
+import { REQUEST_MEMBERS, RECEIVE_MEMBERS, REQUEST_MEMBER, RECEIVE_MEMBER } from './actionTypes'
+import { Config } from '../config'
 
 const requestMembers = () => {
   return {
-    type: REQUEST_MEMBERS,
+    type: REQUEST_MEMBERS
   }
 }
 
@@ -16,20 +17,20 @@ const receiveMembers = (members) => {
 
 export const fetchMembers = () => {
   return dispatch => {
-    dispatch(requestMembers());
+    dispatch(requestMembers())
 
     return fetch(Config.API_URL + '/api/members')
       .then(
         response => response.json(),
         error => console.log('An error occured.', error)
       )
-      .then(json => dispatch(receiveMembers(json.members)));
+      .then(json => dispatch(receiveMembers(json.members)))
   }
 }
 
 const requestMember = () => {
   return {
-    type: REQUEST_MEMBER,
+    type: REQUEST_MEMBER
   }
 }
 
@@ -42,13 +43,13 @@ const receiveMember = (member) => {
 
 export const fetchMember = (id) => {
   return dispatch => {
-    dispatch(requestMember());
+    dispatch(requestMember())
 
     return fetch(Config.API_URL + '/api/member/' + id)
       .then(
         response => response.json(),
         error => console.log('An error occured.', error)
       )
-      .then(json => dispatch(receiveMember(json)));
+      .then(json => dispatch(receiveMember(json)))
   }
 }

@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 export const MembersTable = ({ members }) => (
-  <table className="table is-fullwidth table is-striped is-hoverable">
+  <table className='table is-fullwidth table is-striped is-hoverable'>
     <thead>
       <tr>
         <th>Namn</th>
@@ -34,5 +34,5 @@ export const MembersTable = ({ members }) => (
 )
 
 MembersTable.propTypes = {
-  members: PropTypes.array.isRequired,
+  members: PropTypes.array.isRequired
 }

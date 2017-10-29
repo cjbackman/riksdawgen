@@ -1,11 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { Layout } from './pages/_Layout.js';
-import { Store } from './store.js';
-import './styles/_main.scss';
-
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import { Layout } from './pages/_Layout.js'
+import { Store } from './store.js'
+import './styles/_main.scss'
 
 ReactDOM.render(
   <Provider store={Store}>
@@ -14,4 +13,4 @@ ReactDOM.render(
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')
-);
+)
