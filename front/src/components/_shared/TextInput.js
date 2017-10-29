@@ -1,29 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
 export class TextInput extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       text: ''
-    };
-    this.handleChange = this.handleChange.bind(this);
+    }
+    this.handleChange = this.handleChange.bind(this)
   }
 
-  handleChange(event) {
-    this.setState({text: event.target.value});
-    this.props.handleChange(event.target.value);
+  handleChange (event) {
+    this.setState({text: event.target.value})
+    this.props.handleChange(event.target.value)
   }
 
-  render() {
+  render () {
     return (
       <input
-        className="text-input"
-        type="text"
+        className='input'
+        type='text'
         placeholder={this.props.placeholder}
         value={this.state.text}
         onChange={this.handleChange} />
-    );
+    )
   }
 }
 

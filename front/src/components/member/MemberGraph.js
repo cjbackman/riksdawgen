@@ -1,11 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
 export const MemberGraph = ({ member }) => (
   <div>
-    <h3 style={{ borderBottom: '1px solid' }}>Graf om {member.name + 's voteringar'}</h3>
-    <div>
-    </div>
+    <h2 className='subtitle'>Voteringar</h2>
   </div>
 )
 
