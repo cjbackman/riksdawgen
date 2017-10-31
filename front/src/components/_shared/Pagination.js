@@ -4,9 +4,12 @@ import PropTypes from 'prop-types'
 const range = (start, end) => Array.from({ length: (end - start) }, (v, k) => k + start)
 
 export class Pagination extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = { pager: {} }
+  state = { pager: {} }
+
+  static propTypes = {
+    items: PropTypes.array.isRequired,
+    onChangePage: PropTypes.func.isRequired,
+    pageSize: PropTypes.number
   }
 
   componentWillMount () {
@@ -111,10 +114,4 @@ export class Pagination extends React.Component {
       </nav>
     )
   }
-}
-
-Pagination.propTypes = {
-  items: PropTypes.array.isRequired,
-  onChangePage: PropTypes.func.isRequired,
-  pageSize: PropTypes.number
 }

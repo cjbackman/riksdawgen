@@ -2,15 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export class TextInput extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      text: ''
-    }
-    this.handleChange = this.handleChange.bind(this)
+  state = { text: '' }
+
+  static propTypes = {
+    handleChange: PropTypes.func.isRequired,
+    placeholder: PropTypes.string
   }
 
-  handleChange (event) {
+  handleChange = (event) => {
     this.setState({text: event.target.value})
     this.props.handleChange(event.target.value)
   }
@@ -25,9 +24,4 @@ export class TextInput extends React.Component {
         onChange={this.handleChange} />
     )
   }
-}
-
-TextInput.propTypes = {
-  handleChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string
 }

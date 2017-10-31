@@ -1,34 +1,11 @@
 {
+  "parser": "babel-eslint",
   "extends": [ "standard", "standard-jsx", "standard-react"],
   "env": {
     "browser": true,
     "es6": true,
     "jest": true
   },
-  // "extends": [
-  //   "eslint:recommended",
-  //   "plugin:react/recommended",
-  //   "plugin:import/errors"
-  // ]
-  // ,"parserOptions": {
-  //   "ecmaFeatures": {
-  //     "jsx": true
-  //   },
-  //   "sourceType": "module"
-  // }
-  // ,"env": {
-  //   "browser": true,
-  //   "es6": true,
-  //   "jest": true
-  // }
-  // ,"plugins": [
-  //   "react",
-  //   "import"
-  // ]
-  // ,"rules": {
-  //   "no-console": 0,
-  //   "no-process-env":"off"
-  // },
   "globals": {
     "process": false,
     "global": false

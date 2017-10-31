@@ -2,21 +2,19 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-export class _PartyPage extends React.Component {
-  render () {
-    return (
-      <div className='content-wrapper'>
-        <div className='one-third'>
-          {this.props.party}
-        </div>
-      </div>
-    )
-  }
-}
-
-_PartyPage.propTypes = {
+const propTypes = {
   party: PropTypes.string.isRequired
 }
+
+const _PartyPage = ({ party }) => (
+  <div className='content-wrapper'>
+    <div className='one-third'>
+      {party}
+    </div>
+  </div>
+)
+
+_PartyPage.propTypes = propTypes
 
 const mapStateToProps = (state, ownProps) => ({
   party: ownProps.match.params.id

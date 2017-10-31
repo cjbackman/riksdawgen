@@ -2,12 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export class Dropdown extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      selected: {}
-    }
-    this.handleChange = this.handleChange.bind(this)
+  state = { selected: {} }
+
+  static propTypes = {
+    options: PropTypes.array.isRequired,
+    valProp: PropTypes.string.isRequired,
+    labelProp: PropTypes.string.isRequired,
+    handleChange: PropTypes.func.isRequired
   }
 
   componentDidMount () {
@@ -15,13 +16,13 @@ export class Dropdown extends React.Component {
     this.updateSelected(selected)
   }
 
-  handleChange (event) {
+  handleChange = (event) => {
     let selected = this.props.options
       .find(o => o[this.props.valProp] === event.target.value)
     this.updateSelected(selected)
   }
 
-  updateSelected (selected) {
+  updateSelected = (selected) => {
     this.setState({selected})
     this.props.handleChange(selected)
   }
@@ -47,11 +48,4 @@ export class Dropdown extends React.Component {
       </select>
     )
   }
-}
-
-Dropdown.propTypes = {
-  options: PropTypes.array.isRequired,
-  valProp: PropTypes.string.isRequired,
-  labelProp: PropTypes.string.isRequired,
-  handleChange: PropTypes.func.isRequired
 }
