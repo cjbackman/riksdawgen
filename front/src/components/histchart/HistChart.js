@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { scaleLinear } from 'd3-scale'
-import { max, histogram } from 'd3-array'
+import { min, max, histogram, ascending } from 'd3-array'
 import { select } from 'd3-selection'
 import { axisBottom } from 'd3-axis'
 import { transition } from 'd3-transition'
+import { map } from 'd3-collection'
 
 export class HistChart extends Component {
   constructor (props) {
@@ -18,102 +19,159 @@ export class HistChart extends Component {
     this.createHistChart()
   }
   createHistChart () {
-    const t = transition().duration(500)
-    const dimension = this.props.dimension
+    // Some hardcoded stuff, should probably be put somewhere else
+    const partyColors = {
+      'S': '#EE2020',
+      'SD': '#DDDD00',
+      'V': '#AF0000',
+      'L': '#6BB7EC',
+      'C': '#009933',
+      'M': '#1B49DD',
+      'KD': '#231977',
+      'MP': '#83CF39'
+    }
+    let sortOrder = {
+      'S': 1,
+      'SD': 3,
+      'V': 6,
+      'L': 7,
+      'C': 5,
+      'M': 2,
+      'KD': 8,
+      'MP': 4
+    }
+
     const node = this.node
+    const t = transition().duration(500)
+    const margin = {top: 20, right: 20, bottom: 50, left: 20}
+    const width = this.props.size[0] - margin.right - margin.left
+    const height = this.props.size[1] - margin.top - margin.bottom
 
-    const maxValue = max(this.props.data, d => d[dimension])
+    // Clear svg
+    select(node).selectAll('*').remove()
+
+    // Add wrapper g
+    let wrapper = select(node)
+      .append('g')
+      .attr('class', 'wrapper-g')
+      .attr('transform', `translate(${margin.left}, ${margin.top})`)
+
+    // Prep data
+    const dimension = this.props.dimension
+    const filterByParty = this.props.filter
+    let data = this.props.data.slice(0)
+    data.sort((x, y) => ascending(sortOrder[x.party], sortOrder[y.party]))
+    data = filterByParty === 'all' ? data : data.filter(d => d.party === filterByParty)
+
+    // Set scale
+    const maxValue = max(data, d => d[dimension]) + 5
+    const minValue = min(data, d => d[dimension]) - 5
     const x = scaleLinear()
-      .domain([0, maxValue])
-      .range([0, this.props.size[0]])
+      .domain([minValue, maxValue])
+      .range([0, width])
 
-    const nbins = 30
+    // Create bins for histogram
+    const nbins = map(data, d => d[dimension]).size()
     const _histogram = histogram()
       .domain(x.domain())
       .thresholds(x.ticks(nbins))
       .value(d => d[dimension])
+    const bins = _histogram(data)
 
-    const bins = _histogram(this.props.data)
+    // Bind data to g containers
+    let binContainer = wrapper.selectAll('g').data(bins)
 
-    // Add a g container for each bin
-    let binContainer = select(node)
-      .selectAll('g')
-      .data(bins)
     // Remove old containers
     binContainer.exit().remove()
 
     // Add new containers
     let binContainerEnter = binContainer.enter()
       .append('g')
-      .attr('transform', d => `translate(${x(d.x0)}, ${this.props.size[1]})`)
+      .attr('transform', d => `translate(${x(d.x0)}, ${height})`)
 
     // Populate the bin containers with data
-    binContainerEnter.selectAll('circle')
+    binContainerEnter.selectAll('hist-mp-circle')
       .data(d => d.map((p, i) => {
         return {
           idx: i,
           name: p.name,
           value: p[dimension],
+          party: p.party,
           radius: (x(d.x1) - x(d.x0)) / 2
         }
-      }))
+      }), d => d.member_id)
       .enter()
       .append('circle')
-      .attr('class', 'mp-circle')
+      .attr('class', 'hist-mp-circle')
       .attr('cx', 0) // g element already at correct x pos
       .attr('cy', d => -d.idx * 2 * d.radius - d.radius)
+      .style('fill', d => partyColors[d.party])
       .transition(t)
       .attr('r', d => d.radius)
 
+    // Enter + update
     binContainerEnter.merge(binContainer)
-      .attr('transform', d => `translate(${x(d.x0)}, ${this.props.size[1]})`)
+      .attr('transform', d => `translate(${x(d.x0)}, ${height})`)
 
-    // Enter/update/exit for circles, inside each container
+    // Bind data
     let dots = binContainer
-      .selectAll('circle')
+      .selectAll('hist-mp-circle')
       .data(d => d.map((p, i) => {
         return {
           idx: i,
           name: p.name,
           value: p[dimension],
+          party: p.party,
           radius: (x(d.x1) - x(d.x0)) / 2
         }
-      }))
+      }), d => d.member_id)
 
     // Remove elements no longer present in data
     dots.exit()
-      .attr('class', 'exit')
       .transition(t)
       .attr('r', 0)
       .remove()
 
+    // Update dots
+    dots.style('fill', d => partyColors[d.party])
+
     // Add new dots found in data
     dots.enter()
       .append('circle')
-      .attr('class', 'mp-circle')
+      .attr('class', 'hist-mp-circle')
       .attr('cx', 0)
       .attr('cy', d => -d.idx * 2 * d.radius - d.radius)
+      .style('fill', d => partyColors[d.party])
       .merge(dots)
       .transition(t)
       .attr('r', d => d.radius)
 
     // Add x axis
-    select(node)
+    wrapper
       .append('g')
       .attr('class', 'axis axis--x')
-      .attr('transform', `translate(0,${this.props.size[1]})`)
+      .attr('transform', `translate(0, ${height})`)
       .call(axisBottom(x))
+
+    // Add axis label
+    let labels = {'age': 'Ålder', 'assignment_count': 'Antal uppdrag'}
+    wrapper.append('text')
+      .attr('transform', `translate(${width / 2}, ${height + margin.bottom / 3})`)
+      .attr('dy', '1em')
+      .style('text-anchor', 'middle')
+      .text(labels[dimension])
   }
 
   render () {
     return (
-      <svg ref={node => { this.node = node }} width={350} height={350} />
+      <svg ref={node => { this.node = node }} width={500} height={500} />
     )
   }
 }
 
 HistChart.propTypes = {
   dimension: PropTypes.string.isRequired,
+  filter: PropTypes.string.isRequired,
   size: PropTypes.array.isRequired,
   data: PropTypes.array.isRequired
 }
