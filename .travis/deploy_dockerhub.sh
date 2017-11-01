@@ -10,7 +10,3 @@ docker push ${TRAVIS_REPO_SLUG}_api
 cd ../front && docker build -f Dockerfile -t ${TRAVIS_REPO_SLUG}_web:$TAG .
 docker push ${TRAVIS_REPO_SLUG}_web
 
-
-#cd api && docker build -f Dockerfile -t build_api .
-#cd ../front && docker build -f Dockerfile -t build_web .
-

@@ -1,18 +1,15 @@
 sudo: required
 
-matrix:
-  include:
-    - language: python
-      script:
-        - cd api && python setup.py pytest
-
-    - language: node_js
-      script:
-        - cd front && npm install && npm run build && npm run test
-
-after_success:
-  - sh .travis/deploy_dockerhub.sh
-
 branches:
   only:
   - adding-travis-config
+
+jobs:
+  include:
+    - stage: test
+      - language: python
+        script: cd api && python setup.py pytest
+      - langauge: node_js
+        script: cd front && npm install && npm run build && npm run test
+    - stage: deploy
+      script: sh .travis/deploy_dockerhub.sh
