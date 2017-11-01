@@ -2,14 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
+const propTypes = {
+  members: PropTypes.array.isRequired
+}
+
 export const MembersTable = ({ members }) => (
   <table className='table is-fullwidth table is-striped is-hoverable'>
     <thead>
       <tr>
         <th>Namn</th>
-        <th>Ålder</th>
+        <th className='is-hidden-mobile'>Ålder</th>
         <th>Parti</th>
-        <th>Valkrets</th>
+        <th className='is-hidden-mobile'>Valkrets</th>
       </tr>
     </thead>
     <tbody>
@@ -20,19 +24,17 @@ export const MembersTable = ({ members }) => (
               {member.name}
             </Link>
           </td>
-          <td>{member.age}</td>
+          <td className='is-hidden-mobile'>{member.age}</td>
           <td>
             <Link to={`/party/${member.party.toLowerCase()}`}>
               {member.party}
             </Link>
           </td>
-          <td>{member.constituency}</td>
+          <td className='is-hidden-mobile'>{member.constituency}</td>
         </tr>
       )}
     </tbody>
   </table>
 )
 
-MembersTable.propTypes = {
-  members: PropTypes.array.isRequired
-}
+MembersTable.propTypes = propTypes

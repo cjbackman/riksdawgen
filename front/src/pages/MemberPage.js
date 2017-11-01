@@ -8,6 +8,13 @@ import { MemberGraph } from '../components/member/MemberGraph'
 import { MemberAssignmentsContainer } from '../components/member/MemberAssignmentsContainer'
 
 export class _MemberPage extends React.Component {
+  static propTypes = {
+    memberId: PropTypes.string.isRequired,
+    fetchMember: PropTypes.func.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    member: PropTypes.object
+  }
+
   componentDidMount () {
     const { memberId } = this.props
     this.props.fetchMember(memberId)
@@ -33,13 +40,6 @@ export class _MemberPage extends React.Component {
       </div>
     )
   }
-}
-
-_MemberPage.propTypes = {
-  memberId: PropTypes.string.isRequired,
-  fetchMember: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-  member: PropTypes.object
 }
 
 const mapStateToProps = (state, ownProps) => ({

@@ -3,38 +3,29 @@ import PropTypes from 'prop-types'
 import { Dropdown } from '../_shared/Dropdown.js'
 import { HistChart } from '../histchart/HistChart'
 import { Spinner } from '../_shared/Spinner'
+import { parties } from '../../utils'
+
+const filters = [{ value: 'all', label: 'Alla' }, ...parties]
+const dimensions = [
+  { value: 'age', label: 'åldersfördelningen' },
+  { value: 'assignment_count', label: 'uppdragsfördelningen' }
+]
 
 export class MembersBargraph extends Component {
-  constructor () {
-    super()
-    this.state = {
-      dimensions: [
-        { value: 'age', label: 'åldersfördelningen' },
-        { value: 'assignment_count', label: 'uppdragsfördelningen' }
-      ],
-      filters: [
-        { value: 'all', label: 'alla' },
-        { value: 'S', label: 'Socialdemokraternas' },
-        { value: 'M', label: 'Moderaternas' },
-        { value: 'SD', label: 'Sverigedemokraternas' },
-        { value: 'MP', label: 'Miljöpartiets' },
-        { value: 'C', label: 'Centerpartiets' },
-        { value: 'V', label: 'Vänsterpartiets' },
-        { value: 'L', label: 'Liberalernas' },
-        { value: 'KD', label: 'Kristdemokraternas' }
-      ],
-      selectedDimension: {},
-      selectedFilter: {}
-    }
-    this.handleDimChange = this.handleDimChange.bind(this)
-    this.handleFilterChange = this.handleFilterChange.bind(this)
+  static propTypes = {
+    members: PropTypes.array.isRequired
   }
 
-  handleDimChange (selectedDimension) {
+  state = {
+    selectedDimension: {},
+    selectedFilter: {}
+  }
+
+  handleDimChange = (selectedDimension) => {
     this.setState({ selectedDimension })
   }
 
-  handleFilterChange (selectedFilter) {
+  handleFilterChange = (selectedFilter) => {
     this.setState({ selectedFilter })
   }
 
@@ -42,11 +33,11 @@ export class MembersBargraph extends Component {
     return (
       <div>
         <div className='field'>
-          Hur ser
+          <span className='has-text-left'>Hur ser</span>
           <span className='control'>
             <span className='select'>
               <Dropdown
-                options={this.state.dimensions}
+                options={dimensions}
                 valProp='value'
                 labelProp='label'
                 handleChange={this.handleDimChange} />
@@ -54,7 +45,7 @@ export class MembersBargraph extends Component {
           </span> ut, bland <span className='control'>
             <span className='select'>
               <Dropdown
-                options={this.state.filters}
+                options={filters}
                 valProp='value'
                 labelProp='label'
                 handleChange={this.handleFilterChange} />
@@ -67,15 +58,11 @@ export class MembersBargraph extends Component {
             filter={this.state.selectedFilter.value}
             from={this.state.selectedDimension.from}
             to={this.state.selectedDimension.to}
-            size={[500, 500]}
+            size={[500, 600]}
             data={this.props.members} />
           }
         </div>
       </div>
     )
   }
-}
-
-MembersBargraph.propTypes = {
-  members: PropTypes.array.isRequired
 }

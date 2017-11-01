@@ -4,14 +4,13 @@ import { MemberAssignments } from './MemberAssignments'
 import { Pagination } from '../_shared/Pagination'
 
 export class MemberAssignmentsContainer extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      pagedAssignments: []
-    }
-    this.onChangePage = this.onChangePage.bind(this)
+  static propTypes = {
+    member: PropTypes.object.isRequired
   }
-  onChangePage (pagedAssignments) {
+
+  state = { pagedAssignments: [] }
+
+  onChangePage = (pagedAssignments) => {
     this.setState({ pagedAssignments })
   }
 
@@ -24,8 +23,4 @@ export class MemberAssignmentsContainer extends React.Component {
       </div>
     )
   }
-}
-
-MemberAssignmentsContainer.propTypes = {
-  member: PropTypes.object.isRequired
 }

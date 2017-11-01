@@ -4,39 +4,37 @@ import { MembersTable } from './MembersTable'
 import { TextInput } from '../_shared/TextInput'
 import { Dropdown } from '../_shared/Dropdown'
 import { Pagination } from '../_shared/Pagination'
-import { Parties } from '../../data'
+import { parties } from '../../utils'
 
-const partyOptions = [{ value: '', label: 'Alla' }, ...Parties]
+const partyOptions = [{ value: '', label: 'Alla' }, ...parties]
 
 export class MembersTableContainer extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      pagedMembers: [],
-      searchText: '',
-      selectedParty: {}
-    }
-    this.onNameChanged = this.onNameChanged.bind(this)
-    this.onPartyChanged = this.onPartyChanged.bind(this)
-    this.onChangePage = this.onChangePage.bind(this)
+  static propTypes = {
+    members: PropTypes.array.isRequired
   }
 
-  onNameChanged (text) {
+  state = {
+    pagedMembers: [],
+    searchText: '',
+    selectedParty: {}
+  }
+
+  onNameChanged = (text) => {
     let searchText = text.toLowerCase()
     this.setState({ searchText })
   }
 
-  onPartyChanged (selectedParty) {
+  onPartyChanged = (selectedParty) => {
     this.setState({ selectedParty })
   }
 
-  onChangePage (pagedMembers) {
+  onChangePage = (pagedMembers) => {
     this.setState({ pagedMembers })
   }
 
   render () {
     let filteredMembers = this.props.members.filter(m => m.name.toLowerCase().includes(this.state.searchText) &&
-      (!this.state.selectedParty.value || this.state.selectedParty.value === m.party.toLowerCase()))
+      (!this.state.selectedParty.value || this.state.selectedParty.value === m.party))
 
     return (
       <div>
@@ -61,12 +59,8 @@ export class MembersTableContainer extends React.Component {
           </div>
         </div>
         <MembersTable members={this.state.pagedMembers} />
-        <Pagination items={filteredMembers} onChangePage={this.onChangePage} pageSize={10} />
+        <Pagination items={filteredMembers} onChangePage={this.onChangePage} pageSize={12} />
       </div>
     )
   }
-}
-
-MembersTableContainer.propTypes = {
-  members: PropTypes.array.isRequired
 }

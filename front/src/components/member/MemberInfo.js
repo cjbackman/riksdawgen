@@ -1,6 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+const propTypes = {
+  member: PropTypes.object.isRequired
+}
+
 export const MemberInfo = ({ member }) => (
   <div>
     <h2 className='subtitle'>Information</h2>
@@ -26,6 +30,4 @@ export const MemberInfo = ({ member }) => (
   </div>
 )
 
-MemberInfo.propTypes = {
-  member: PropTypes.object.isRequired
-}
+MemberInfo.propTypes = propTypes

@@ -6,41 +6,24 @@ import { select } from 'd3-selection'
 import { axisBottom } from 'd3-axis'
 import { transition } from 'd3-transition'
 import { map } from 'd3-collection'
+import { getPartyProp } from '../../utils'
 
 export class HistChart extends Component {
-  constructor (props) {
-    super(props)
-    this.createHistChart = this.createHistChart.bind(this)
+  static propTypes = {
+    dimension: PropTypes.string.isRequired,
+    filter: PropTypes.string.isRequired,
+    size: PropTypes.array.isRequired,
+    data: PropTypes.array.isRequired
   }
+
   componentDidMount () {
     this.createHistChart()
   }
   componentDidUpdate () {
     this.createHistChart()
   }
-  createHistChart () {
-    // Some hardcoded stuff, should probably be put somewhere else
-    const partyColors = {
-      'S': '#EE2020',
-      'SD': '#DDDD00',
-      'V': '#AF0000',
-      'L': '#6BB7EC',
-      'C': '#009933',
-      'M': '#1B49DD',
-      'KD': '#231977',
-      'MP': '#83CF39'
-    }
-    let sortOrder = {
-      'S': 1,
-      'SD': 3,
-      'V': 6,
-      'L': 7,
-      'C': 5,
-      'M': 2,
-      'KD': 8,
-      'MP': 4
-    }
 
+  createHistChart = () => {
     const node = this.node
     const t = transition().duration(500)
     const margin = {top: 20, right: 20, bottom: 50, left: 20}
@@ -60,7 +43,7 @@ export class HistChart extends Component {
     const dimension = this.props.dimension
     const filterByParty = this.props.filter
     let data = this.props.data.slice(0)
-    data.sort((x, y) => ascending(sortOrder[x.party], sortOrder[y.party]))
+    data.sort((x, y) => ascending(getPartyProp(x.party, 'sortOrder'), getPartyProp(y.party, 'sortOrder')))
     data = filterByParty === 'all' ? data : data.filter(d => d.party === filterByParty)
 
     // Set scale
@@ -105,7 +88,7 @@ export class HistChart extends Component {
       .attr('class', 'hist-mp-circle')
       .attr('cx', 0) // g element already at correct x pos
       .attr('cy', d => -d.idx * 2 * d.radius - d.radius)
-      .style('fill', d => partyColors[d.party])
+      .style('fill', d => getPartyProp(d.party, 'color'))
       .transition(t)
       .attr('r', d => d.radius)
 
@@ -133,7 +116,7 @@ export class HistChart extends Component {
       .remove()
 
     // Update dots
-    dots.style('fill', d => partyColors[d.party])
+    dots.style('fill', d => getPartyProp(d.party, 'color'))
 
     // Add new dots found in data
     dots.enter()
@@ -141,7 +124,7 @@ export class HistChart extends Component {
       .attr('class', 'hist-mp-circle')
       .attr('cx', 0)
       .attr('cy', d => -d.idx * 2 * d.radius - d.radius)
-      .style('fill', d => partyColors[d.party])
+      .style('fill', d => getPartyProp(d.party, 'color'))
       .merge(dots)
       .transition(t)
       .attr('r', d => d.radius)
@@ -164,14 +147,7 @@ export class HistChart extends Component {
 
   render () {
     return (
-      <svg ref={node => { this.node = node }} width={500} height={500} />
+      <svg ref={node => { this.node = node }} width={500} height={600} />
     )
   }
-}
-
-HistChart.propTypes = {
-  dimension: PropTypes.string.isRequired,
-  filter: PropTypes.string.isRequired,
-  size: PropTypes.array.isRequired,
-  data: PropTypes.array.isRequired
 }

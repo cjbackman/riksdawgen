@@ -1,6 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+const propTypes = {
+  assignments: PropTypes.array.isRequired
+}
+
 export const MemberAssignments = ({ assignments }) => (
   <table className='table is-fullwidth table is-striped is-hoverable'>
     <thead>
@@ -26,6 +30,4 @@ export const MemberAssignments = ({ assignments }) => (
   </table>
 )
 
-MemberAssignments.propTypes = {
-  assignments: PropTypes.array.isRequired
-}
+MemberAssignments.propTypes = propTypes
