@@ -2,6 +2,8 @@ language: python
 script:
   - cd api && python setup.py pytest
 
+after_success:
+  - sh .travis/deploy_dockerhub.sh
 
 branches:
   only:
