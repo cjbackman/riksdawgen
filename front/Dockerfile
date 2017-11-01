@@ -9,5 +9,19 @@ RUN mkdir -p /usr/src/app
 RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/nginx.conf
 
+
+# Install dependencies and nodejs
+RUN apt-get update && apt-get install -my wget gnupg
+RUN apt-get install -y curl
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN apt-get install -y nodejs
+RUN apt-get install -y build-essential
+
+COPY ./package.json ./package-lock.json ./webpack.common.js ./webpack.dev.js ./webpack.prod.js ./.eslintrc.json ./.babelrc /tmp/
+RUN mkdir /tmp/src/
+COPY ./src/ /tmp/src/
+RUN cd /tmp && npm install
+RUN cd /tmp && npm run build
+
 # Copy static assets into /usr/src
-COPY ./dist /usr/src/app
+COPY /tmp/dist /usr/src/app
