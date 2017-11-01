@@ -6,10 +6,11 @@ branches:
 
 jobs:
   include:
-    - stage: test
+    - stage: test_api
       language: python
       script: cd api && python setup.py pytest
+    - stage: test_front
       langauge: node_js
-      script: cd front && npm install && npm run build && npm run test
+      script: cd front && npm install && npm run build
     - stage: deploy
       script: sh .travis/deploy_dockerhub.sh
