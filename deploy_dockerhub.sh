@@ -5,6 +5,5 @@ if [ "$TRAVIS_BRANCH" = "master" ]; then
 else
     TAG="$TRAVIS_BRANCH"
 fi
-docker-compose build --pull
-docker push riksdawgen_web
-docker push riksdawgen_api
+docker build -f api/Dockerfile -t $TRAVIS_REPO_SLUG:$TAG .
+docker push $TRAVIS_REPO_SLUG
