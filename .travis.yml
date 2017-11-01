@@ -1,0 +1,8 @@
+language: python
+script:
+  - cd api && python setup.py pytest
+
+
+branches:
+  only:
+  - adding-travis-config
