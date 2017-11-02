@@ -5,6 +5,7 @@ from flask import jsonify
 import json
 from api import REDIS
 from api.voting import voting
+from api.documents import documents
 
 ns = Namespace('member', description='Retreival of member data.')
 
@@ -35,3 +36,19 @@ class member_API(Resource):
 
         return jsonify(raw_json)
 
+@ns.route('/<string:member_id>/documents')
+class member_doc_API(Resource):
+
+    @ns.response(200, 'OK.')
+    @ns.response(404, 'Member not found.')
+
+    def get(self, member_id):
+        """Retreive documents related to a single member."""
+
+        doc = documents()
+        member_doc_list = doc.member_doc(member_id)
+
+        if (member_doc_list is None):
+            member_doc_list = "{}"
+
+        return jsonify(member_doc_list)
