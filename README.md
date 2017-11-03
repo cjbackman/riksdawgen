@@ -39,3 +39,6 @@ sudo apt-get install nodejs
 npm install
 ```
 
+<!-- ## Markdown
+
+[![Build Status](https://travis-ci.org/cjbackman/riksdawgen.svg?branch=adding-travis-config)](https://travis-ci.org/cjbackman/riksdawgen) -->
