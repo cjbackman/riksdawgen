@@ -26,7 +26,7 @@ export const MembersTable = ({ members }) => (
           </td>
           <td className='is-hidden-mobile'>{member.age}</td>
           <td>
-            <Link to={`/party/${member.party.toLowerCase()}`}>
+            <Link to={`/party/${member.party}`}>
               {member.party}
             </Link>
           </td>

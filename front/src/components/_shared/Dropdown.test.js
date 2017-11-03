@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { Dropdown } from './Dropdown.js'
 
-describe('<Spinner />', () => {
+describe('<Dropdown />', () => {
   let props
 
   beforeEach(() => {
@@ -28,7 +28,6 @@ describe('<Spinner />', () => {
 
     const wrapper = shallow(<Dropdown {..._props} />)
     expect(wrapper.find('select')).toHaveLength(1)
-    expect(wrapper.find('select').hasClass('select')).toBeTruthy()
     expect(wrapper.find('option')).toHaveLength(2)
   })
 })
