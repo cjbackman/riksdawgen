@@ -23,4 +23,3 @@ COPY ./src/ /tmp/src/
 RUN cd /tmp && npm install && npm run build
 
 # Copy static assets into /usr/src
-COPY /dist /usr/src/app
