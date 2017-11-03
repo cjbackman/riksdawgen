@@ -10,13 +10,13 @@ jobs:
       language: python
       python: "3.6"
       install: cd api && pip install -r requirements.txt
-      script: cd api && python setup.py pytest
+      script: python setup.py pytest
 
     - stage: test_front
       language: node_js
       node_js: stable
       install: cd front && npm install && npm run build
-      script: cd front && npm run test
+      script: npm run test
 
     - stage: deploy
       script: sh .travis/deploy_dockerhub.sh
