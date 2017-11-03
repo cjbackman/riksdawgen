@@ -16,7 +16,7 @@ jobs:
       language: node_js
       node_js: stable
       install: cd front && npm install && npm run build
-      script: cd front && npm test
+      script: cd front && npm run test
 
     - stage: deploy
       script: sh .travis/deploy_dockerhub.sh
