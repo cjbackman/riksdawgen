@@ -20,8 +20,7 @@ RUN apt-get install -y build-essential
 COPY ./package.json ./package-lock.json ./webpack.common.js ./webpack.dev.js ./webpack.prod.js ./.eslintrc.json ./.babelrc /tmp/
 RUN mkdir /tmp/src/
 COPY ./src/ /tmp/src/
-RUN cd /tmp && npm install
-RUN cd /tmp && npm run build
+RUN cd /tmp && npm install && npm run build
 
 # Copy static assets into /usr/src
 COPY /tmp/dist /usr/src/app
