@@ -25,7 +25,7 @@ Kill the service with `Ctrl+C` and shut down the containers by `docker-compose d
 
 ## If `npm install` fails
 
-First, try 
+First, try
 
 ```
 npm install -g webpack webpack-dev-server
@@ -38,3 +38,4 @@ curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash --
 sudo apt-get install nodejs
 npm install
 ```
+
