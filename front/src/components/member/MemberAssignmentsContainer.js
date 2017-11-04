@@ -46,7 +46,11 @@ export class MemberAssignmentsContainer extends React.Component {
           </ul>
         </div>
         <MemberAssignments assignments={this.state.paged} />
-        <Pagination items={this.state.showActive ? this.state.active : this.state.previous} onChangePage={this.onChangePage} pageSize={8} />
+        <Pagination
+          items={this.state.showActive ? this.state.active : this.state.previous}
+          onChangePage={this.onChangePage}
+          pageSize={5}
+          size='small' />
       </div>
     )
   }
