@@ -9,7 +9,8 @@ export class Pagination extends React.Component {
   static propTypes = {
     items: PropTypes.array.isRequired,
     onChangePage: PropTypes.func.isRequired,
-    pageSize: PropTypes.number
+    pageSize: PropTypes.number,
+    size: PropTypes.string
   }
 
   componentWillMount () {
@@ -91,7 +92,7 @@ export class Pagination extends React.Component {
     }
 
     return (
-      <nav className='pagination is-centered'>
+      <nav className={'pagination is-centered ' + (this.props.size === 'small' ? 'is-size-7' : '')}>
         <ul className='pagination-list'>
           <li onClick={() => this.setPage(1)}>
             <a className={'pagination-link ' + (pager.currentPage === 1 ? 'is-invisible' : '')}>

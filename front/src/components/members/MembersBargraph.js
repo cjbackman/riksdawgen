@@ -32,9 +32,9 @@ export class MembersBargraph extends Component {
   render () {
     return (
       <div>
-        <div className='field'>
-          <span className='has-text-left'>Hur ser</span>
-          <span className='control'>
+        <div className='level'>
+          <div className='level-item'>
+            <span style={{ marginRight: '1rem' }}>Hur ser</span>
             <span className='select'>
               <Dropdown
                 options={dimensions}
@@ -42,7 +42,7 @@ export class MembersBargraph extends Component {
                 labelProp='label'
                 handleChange={this.handleDimChange} />
             </span>
-          </span> ut, bland <span className='control'>
+            <span style={{ marginLeft: '1rem', marginRight: '1rem' }}>ut, bland</span>
             <span className='select'>
               <Dropdown
                 options={filters}
@@ -50,7 +50,7 @@ export class MembersBargraph extends Component {
                 labelProp='label'
                 handleChange={this.handleFilterChange} />
             </span>
-          </span> ledamöter i Riksdagen?
+          </div>
         </div>
         <div className='has-text-centered'>
           {(!this.state.selectedDimension.value || !this.state.selectedFilter) ? <Spinner /> : <HistChart

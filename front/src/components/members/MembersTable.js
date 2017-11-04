@@ -10,17 +10,17 @@ export const MembersTable = ({ members }) => (
   <table className='table is-fullwidth table is-striped is-hoverable'>
     <thead>
       <tr>
-        <th>Namn</th>
-        <th className='is-hidden-mobile'>Ålder</th>
-        <th>Parti</th>
-        <th className='is-hidden-mobile'>Valkrets</th>
+        <th style={{width: '40%'}}>Namn</th>
+        <th style={{width: '10%'}} className='is-hidden-mobile'>Ålder</th>
+        <th style={{width: '10%'}}>Parti</th>
+        <th style={{width: '40%'}} className='is-hidden-mobile'>Valkrets</th>
       </tr>
     </thead>
     <tbody>
       {members.map((member, index) =>
         <tr key={index}>
           <td>
-            <Link to={`/members/${member.member_id}`}>
+            <Link to={`/member/${member.member_id}`}>
               {member.name}
             </Link>
           </td>
