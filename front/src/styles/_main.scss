@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Quicksand);
-@import '~bulma/bulma';
 @import './spinner.scss';
 @import './d3.scss';
 
@@ -14,3 +13,17 @@ html, body {
 .subtitle {
   border-bottom: 1px solid black;
 }
+
+.section {
+  padding: 3rem 1.5rem;
+  height: 100vh;
+}
+
+
+// BULMA - Change defaul variables here
+$link : darkgrey;
+$link-hover : black;
+$pagination-current-color: white;
+$pagination-border-color: darkgrey;
+$pagination-current-border-color: darkgrey;
+@import '~bulma/bulma';

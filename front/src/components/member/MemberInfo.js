@@ -7,12 +7,12 @@ const propTypes = {
 
 export const MemberInfo = ({ member }) => (
   <div>
-    <h2 className='subtitle'>Information</h2>
+    <h2 className='subtitle'>{member.name}</h2>
     <div className='columns'>
-      <div className='column'>
+      <div className='column is-4'>
         <img src={member.image} />
       </div>
-      <div className='column'>
+      <div className='column is-8'>
         <div className='field is-grouped'>
           <label className='label control'>År</label>
           <p className='control'>{member.age}</p>

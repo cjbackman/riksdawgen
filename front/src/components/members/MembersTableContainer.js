@@ -41,7 +41,7 @@ export class MembersTableContainer extends React.Component {
         <div className='columns'>
           <div className='column'>
             <div className='field'>
-              <label className='label'>Name</label>
+              <label className='label is-size-7'>Ledamot</label>
               <div className='control'>
                 <TextInput handleChange={this.onNameChanged} placeholder='Sök' />
               </div>
@@ -49,7 +49,7 @@ export class MembersTableContainer extends React.Component {
           </div>
           <div className='column'>
             <div className='field'>
-              <label className='label'>Subject</label>
+              <label className='label is-size-7'>Parti</label>
               <div className='control'>
                 <div className='select'>
                   <Dropdown options={partyOptions} valProp='value' labelProp='label' handleChange={this.onPartyChanged} />

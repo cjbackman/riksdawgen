@@ -23,7 +23,6 @@ export class _MemberPage extends React.Component {
   render () {
     return (
       this.props.isFetching || !this.props.member ? <Spinner /> : <div>
-        <h1 className='title'>{this.props.member.name}</h1>
         <div className='columns'>
           <div className='column is-one-half'>
             <MemberInfo member={this.props.member} />

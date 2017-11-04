@@ -13,11 +13,11 @@ const propTypes = {
 const _MembersPage = ({ isFetching, members }) => (
   isFetching ? <Spinner />
     : <div className='columns'>
-      <div className='column is-4 is-offset-1'>
+      <div className='column is-6'>
         <h2 className='subtitle border-bottom'>Ledamöter</h2>
         <MembersTableContainer members={members} isFetching={isFetching} />
       </div>
-      <div className='column is-4 is-offset-1'>
+      <div className='column is-6'>
         <h2 className='subtitle border-bottom'>En smutt graf</h2>
         <MembersBargraph members={members} isFetching={isFetching} />
       </div>

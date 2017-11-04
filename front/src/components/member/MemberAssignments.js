@@ -9,11 +9,11 @@ export const MemberAssignments = ({ assignments }) => (
   <table className='table is-fullwidth table is-striped is-hoverable'>
     <thead>
       <tr>
-        <th>Funktion</th>
-        <th>Roll</th>
-        <th>Status</th>
-        <th>Startdatum</th>
-        <th>Slutdatum</th>
+        <th className='is-size-7' style={{width: '41%'}}>Funktion</th>
+        <th className='is-size-7' style={{width: '20%'}}>Roll</th>
+        <th className='is-size-7' style={{width: '15%'}}>Status</th>
+        <th className='is-size-7' style={{width: '12%'}}>Startdatum</th>
+        <th className='is-size-7' style={{width: '12%'}}>Slutdatum</th>
       </tr>
     </thead>
     <tbody>
