@@ -21,5 +21,8 @@ jobs:
       install: cd front && npm install && npm run build
       script: npm run test
 
-    - stage: deploy
+    - stage: deploy_to_docker_hub
       script: sh .travis/deploy_dockerhub.sh
+
+    #- stage: deploy_to_heroku
+    #  script: sh .travis/deploy_dockerhub.sh

@@ -23,6 +23,7 @@ RUN npm config set registry http://registry.npmjs.org/ && npm install
 
 # Build static files
 WORKDIR /usr/src/app
-COPY . /usr/src/app/ # Slim this later and only copy what's neccessary
+# Slim this later and only copy what's neccessary
+COPY . /usr/src/app/
 RUN cp -a /tmp/node_modules /usr/src/app/
 RUN npm run build
