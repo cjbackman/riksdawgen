@@ -1,2 +1,9 @@
-*node_modules/
-*dist/
+node_modules/
+dist/
+.babelrc
+eslintrc.json
+Dockerfile
+nginx.conf
+test/
+package*
+*.md
