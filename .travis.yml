@@ -19,7 +19,7 @@ jobs:
       #   directories:
       #     - node_modules
       node_js: stable
-      install: cd front && npm install && npm run build && npm run test
+      install: cd front && npm install && npm run build
       script: npm run test
 
     - stage: deploy_to_docker_hub
