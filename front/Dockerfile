@@ -2,23 +2,20 @@ FROM nginx:latest
 
 EXPOSE 80
 
-# Set working directory
+# Createa working directory
 RUN mkdir -p /usr/src/app
 
 # Add nginx config
 RUN rm /etc/nginx/conf.d/default.conf
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx.conf /etc/nginx/nginx.conf
 
-# Install dependencies and nodejs
-RUN apt-get update && apt-get install -my wget gnupg
-RUN apt-get install -y curl
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
-RUN apt-get install -y nodejs
-RUN apt-get install -y build-essential
+# Install nodejs
+RUN apt-get update && apt-get install -my wget gnupg curl
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && apt-get install -y nodejs build-essential
 
-# Install mf node_modules/
+# Install node_modules/
 WORKDIR /tmp
-COPY ./package.json ./package-lock.json ./webpack.common.js ./webpack.dev.js ./webpack.prod.js ./.eslintrc.json ./.babelrc /tmp/
+COPY ./package.json /tmp/
 RUN npm config set registry http://registry.npmjs.org/ && npm install
 
 # Build static files
