@@ -1,0 +1,28 @@
+sudo: required
+
+branches:
+  only:
+  - adding-travis-config
+
+jobs:
+  include:
+    - stage: test_api
+      language: python
+      python: "3.6"
+      install: cd api && pip install -r requirements.txt
+      script: python setup.py pytest
+
+    - stage: test_front
+      language: node_js
+      # cache:
+      #   directories:
+      #     - node_modules
+      node_js: stable
+      install: cd front && npm install && npm run build
+      script: npm run test
+
+    - stage: deploy_to_docker_hub
+      script: sh .travis/deploy_dockerhub.sh
+
+    #- stage: deploy_to_heroku
+    #  script: sh .travis/deploy_dockerhub.sh
