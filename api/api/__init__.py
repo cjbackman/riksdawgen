@@ -1,8 +1,8 @@
 """Test Python App"""
 from flask import Flask, jsonify
-from flask_restful import Api, Resource
+from flask_restplus import Api, Resource
 from flask_cors import CORS, cross_origin
-from members import members
+from api.members import members
 from redis import StrictRedis
 import json
 
@@ -18,28 +18,17 @@ except:
     APP.config['REDIS_SERVER'] = 'localhost'
     # APP.config['DEBUG'] = True
 
+
 REDIS = StrictRedis(host=APP.config[
                     'REDIS_SERVER'], port=6379, charset="utf-8", decode_responses=True)
 
+# NOTE: Modules relying on REDIS cannot be imported until REDIS is created.
+from api.endpoints.member_api import ns as member_api
+from api.endpoints.members_api import ns as members_api
 
-class members_API(Resource):
-        def get(self):
-                members = REDIS.get("members")
-                return jsonify(json.loads(members))
-
-class member_API(Resource):
-        def get(self, member_id):
-                member = REDIS.get(member_id)
-
-                if(member is None):
-                    member="{}"
-
-                return jsonify(json.loads(member))
-
-
-api.add_resource(members_API, '/api/members', endpoint='members')
-api.add_resource(member_API, '/api/member/<string:member_id>',
-                 endpoint='member')
+# Add all namespaces from submodules
+api.add_namespace(member_api)
+api.add_namespace(members_api)
 
 @APP.before_first_request
 def fetch_data():
@@ -60,16 +49,7 @@ def connect_to_data():
         print("MP is None, forced to fetch new. This shall not happen.")
         fetch_data()
 
-@APP.route("/api")
-def welcome():
-    """Welcome Text"""
-    return "Welcome Riksdawgen's API! The end of the rainbow, where G&T brings you magic."
-
-@APP.route("/api/hello")
-def hello():
-    return "Hello World"
-
 # Only to enable easy debugging on host development machines, without running gunicorn server.
 # Do not use flask server in production...
-if __name__ == '__main__':
-    APP.run(debug=True)
+#if __name__ == '__main__':
+#    APP.run(debug=True)

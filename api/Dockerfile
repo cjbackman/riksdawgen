@@ -19,5 +19,5 @@ ADD . /usr/src/app
 ENV FLASK_SETTINGS flask_docker_settings.cfg
 
 # run server
-ENTRYPOINT ["gunicorn", "-b", ":5000", "app:APP"]
+ENTRYPOINT ["gunicorn", "-b", ":5000", "api:APP"]
 
