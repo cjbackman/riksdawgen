@@ -2,7 +2,8 @@ sudo: required
 
 branches:
   only:
-  - adding-travis-config
+  - develop
+  - master
 
 jobs:
   include:
