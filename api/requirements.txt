@@ -3,6 +3,6 @@ gunicorn==19.7.1
 requests==2.18.4
 redis==2.10.6
 flask_cors==3.0.3
-flask_restful==0.3.6
 pytest==3.2.3
 pytest-runner==3.0
+flask_restplus==0.10.1
