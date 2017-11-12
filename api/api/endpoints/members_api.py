@@ -5,7 +5,7 @@ from flask import jsonify
 import json
 from api import REDIS
 
-ns = Namespace('api/members', description='Retreival basic data for all members.')
+ns = Namespace('members', description='Retreival basic data for all members.')
 
 @ns.route('/')
 class members_API(Resource):

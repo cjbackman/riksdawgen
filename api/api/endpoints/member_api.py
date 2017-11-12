@@ -6,7 +6,7 @@ import json
 from api import REDIS
 from api.voting import voting
 
-ns = Namespace('api/member', description='Retreival of member data.')
+ns = Namespace('member', description='Retreival of member data.')
 
 @ns.route('/<string:member_id>')
 class member_API(Resource):
