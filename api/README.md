@@ -15,4 +15,4 @@ There are three sources of configuration:
 2. Personal configuration (optional)
 3. Environment variables
 
-Which environment configuration to use is defiend through the environment variable `ENVIRONMENT_CONFIG`. Furthermore, if there is a need for a personal config, simply set the environment variable `USER_CONFIG` to the path where your personal config resides. This path is relative to the where the Flask app is created.
+Which environment configuration to use is defiend through the environment variable `DEPLOY_ENV`. Furthermore, if there is a need for a personal config, simply set the environment variable `USER_CONFIG` to the path where your personal config resides. This path is relative to the where the Flask app is created.
