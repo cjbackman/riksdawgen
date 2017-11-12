@@ -1,4 +1,5 @@
 import os
+import sys
 from flask import Flask
 
 
@@ -27,4 +28,14 @@ config = configs[os.environ.get('DEPLOY_ENV', 'prod')]
 app = create_app(config)
 
 if __name__ == '__main__':
+    if len(sys.argv) > 1:
+        env = sys.argv[1]
+        if env != 'dev' and env != 'prod':
+            raise ValueError('Only dev and prod allowed as input environment.')
+        config = configs[env]
+    else:
+        config = configs[os.environ.get('DEPLOY_ENV', 'prod')]
+
+    print('Starting app with config {}'.format(config))
+    app = create_app(config)
     app.run()
