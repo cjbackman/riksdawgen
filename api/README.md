@@ -5,7 +5,7 @@ Riksdawgen's API
 
 Start the development server by running (you need redis running on localhost:6379)
 
-```export ENVIRONMENT_CONFIG=configs.config.DevelopmentConfig && python app.py```
+```export DEPLOY_ENV=dev && python app.py```
 
 ### Configuration
 
