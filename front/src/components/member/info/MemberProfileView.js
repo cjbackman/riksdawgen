@@ -5,7 +5,7 @@ const propTypes = {
   member: PropTypes.object.isRequired
 }
 
-export const MemberInfo = ({ member }) => (
+export const MemberProfileView = ({ member }) => (
   <div>
     <h2 className='subtitle'>{member.name}</h2>
     <div className='columns'>
@@ -30,4 +30,4 @@ export const MemberInfo = ({ member }) => (
   </div>
 )
 
-MemberInfo.propTypes = propTypes
+MemberProfileView.propTypes = propTypes

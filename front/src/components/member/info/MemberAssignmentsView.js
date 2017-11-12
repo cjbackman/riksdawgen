@@ -5,7 +5,7 @@ const propTypes = {
   assignments: PropTypes.array.isRequired
 }
 
-export const MemberAssignments = ({ assignments }) => (
+export const MemberAssignmentsView = ({ assignments }) => (
   <table className='table is-fullwidth table is-striped is-hoverable is-size-7'>
     <thead>
       <tr>
@@ -30,4 +30,4 @@ export const MemberAssignments = ({ assignments }) => (
   </table>
 )
 
-MemberAssignments.propTypes = propTypes
+MemberAssignmentsView.propTypes = propTypes

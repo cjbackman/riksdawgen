@@ -1,14 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { MemberAssignments } from './MemberAssignments'
-import { Pagination } from '../_shared/Pagination'
+import { MemberAssignmentsView } from './MemberAssignmentsView'
+import { Pagination } from '../../_shared/Pagination'
 
 const currentDate = new Date()
 
-export class MemberAssignmentsContainer extends React.Component {
-  static propTypes = {
-    member: PropTypes.object.isRequired
-  }
+const propTypes = {
+  member: PropTypes.object.isRequired
+}
+
+export class MemberAssignments extends React.Component {
+  static propTypes = propTypes
   state = {
     active: [],
     previous: [],
@@ -45,7 +47,7 @@ export class MemberAssignmentsContainer extends React.Component {
             <li className={!this.state.showActive ? 'is-active' : ''} onClick={() => this.toggleTab(false)}><a>Tidigare uppdrag</a></li>
           </ul>
         </div>
-        <MemberAssignments assignments={this.state.paged} />
+        <MemberAssignmentsView assignments={this.state.paged} />
         <Pagination
           items={this.state.showActive ? this.state.active : this.state.previous}
           onChangePage={this.onChangePage}
