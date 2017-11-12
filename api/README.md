@@ -1,11 +1,17 @@
 Riksdawgen's API
 =========
 
-### Quickstart
+### Quickstart UNIX
 
 Start the development server by running (you need redis running on localhost:6379)
 
 ```export DEPLOY_ENV=dev && python app.py```
+
+### Quickstart Windows
+
+Start the development server by running (you need redis running on localhost:6379)
+
+```python app.py dev```
 
 ### Configuration
 
