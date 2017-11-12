@@ -37,5 +37,5 @@ if __name__ == '__main__':
         config = configs[os.environ.get('DEPLOY_ENV', 'prod')]
 
     print('Starting app with config {}'.format(config))
-    app = create_app(config)
-    app.run()
+    dev_app = create_app(config)
+    dev_app.run()
