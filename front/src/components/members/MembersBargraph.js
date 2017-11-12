@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Dropdown } from '../_shared/Dropdown.js'
-import { HistChart } from '../histchart/HistChart'
+import { MembersHistChart } from './MembersHistChart'
 import { Spinner } from '../_shared/Spinner'
 import { parties } from '../../utils'
 
@@ -53,13 +53,14 @@ export class MembersBargraph extends Component {
           </div>
         </div>
         <div className='has-text-centered'>
-          {(!this.state.selectedDimension.value || !this.state.selectedFilter) ? <Spinner /> : <HistChart
-            dimension={this.state.selectedDimension.value}
-            filter={this.state.selectedFilter.value}
-            from={this.state.selectedDimension.from}
-            to={this.state.selectedDimension.to}
-            size={[500, 600]}
-            data={this.props.members} />
+          {(!this.state.selectedDimension.value || !this.state.selectedFilter) ? <Spinner />
+            : <MembersHistChart
+              dimension={this.state.selectedDimension.value}
+              filter={this.state.selectedFilter.value}
+              from={this.state.selectedDimension.from}
+              to={this.state.selectedDimension.to}
+              size={[500, 600]}
+              data={this.props.members} />
           }
         </div>
       </div>

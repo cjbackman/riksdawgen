@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { MembersTableContainer } from '../components/members/MembersTableContainer'
+import { MembersTable } from '../components/members/MembersTable'
 import { MembersBargraph } from '../components/members/MembersBargraph'
 import { Spinner } from '../components/_shared/Spinner'
 
@@ -15,11 +15,11 @@ const _MembersPage = ({ isFetching, members }) => (
     : <div className='columns'>
       <div className='column is-6'>
         <h2 className='subtitle border-bottom'>Ledamöter</h2>
-        <MembersTableContainer members={members} isFetching={isFetching} />
+        <MembersTable members={members} />
       </div>
       <div className='column is-6'>
         <h2 className='subtitle border-bottom'>En smutt graf</h2>
-        <MembersBargraph members={members} isFetching={isFetching} />
+        <MembersBargraph members={members} />
       </div>
     </div>
 )

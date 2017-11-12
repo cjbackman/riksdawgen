@@ -1,40 +1,66 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { MembersTableView } from './MembersTableView'
+import { TextInput } from '../_shared/TextInput'
+import { Dropdown } from '../_shared/Dropdown'
+import { Pagination } from '../_shared/Pagination'
+import { parties } from '../../utils'
 
-const propTypes = {
-  members: PropTypes.array.isRequired
+const partyOptions = [{ value: '', label: 'Alla' }, ...parties]
+
+export class MembersTable extends React.Component {
+  static propTypes = {
+    members: PropTypes.array.isRequired
+  }
+
+  state = {
+    pagedMembers: [],
+    searchText: '',
+    selectedParty: {}
+  }
+
+  onNameChanged = (text) => {
+    let searchText = text.toLowerCase()
+    this.setState({ searchText })
+  }
+
+  onPartyChanged = (selectedParty) => {
+    this.setState({ selectedParty })
+  }
+
+  onChangePage = (pagedMembers) => {
+    this.setState({ pagedMembers })
+  }
+
+  render () {
+    let filteredMembers = this.props.members.filter(m => m.name.toLowerCase().includes(this.state.searchText) &&
+      (!this.state.selectedParty.value || this.state.selectedParty.value === m.party))
+
+    return (
+      <div>
+        <div className='columns'>
+          <div className='column'>
+            <div className='field'>
+              <label className='label is-size-7'>Ledamot</label>
+              <div className='control'>
+                <TextInput handleChange={this.onNameChanged} placeholder='Sök' />
+              </div>
+            </div>
+          </div>
+          <div className='column'>
+            <div className='field'>
+              <label className='label is-size-7'>Parti</label>
+              <div className='control'>
+                <div className='select'>
+                  <Dropdown options={partyOptions} valProp='value' labelProp='label' handleChange={this.onPartyChanged} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <MembersTableView members={this.state.pagedMembers} />
+        <Pagination items={filteredMembers} onChangePage={this.onChangePage} pageSize={12} />
+      </div>
+    )
+  }
 }
-
-export const MembersTable = ({ members }) => (
-  <table className='table is-fullwidth table is-striped is-hoverable'>
-    <thead>
-      <tr>
-        <th style={{width: '40%'}}>Namn</th>
-        <th style={{width: '10%'}} className='is-hidden-mobile'>Ålder</th>
-        <th style={{width: '10%'}}>Parti</th>
-        <th style={{width: '40%'}} className='is-hidden-mobile'>Valkrets</th>
-      </tr>
-    </thead>
-    <tbody>
-      {members.map((member, index) =>
-        <tr key={index}>
-          <td>
-            <Link to={`/member/${member.member_id}`}>
-              {member.name}
-            </Link>
-          </td>
-          <td className='is-hidden-mobile'>{member.age}</td>
-          <td>
-            <Link to={`/party/${member.party}`}>
-              {member.party}
-            </Link>
-          </td>
-          <td className='is-hidden-mobile'>{member.constituency}</td>
-        </tr>
-      )}
-    </tbody>
-  </table>
-)
-
-MembersTable.propTypes = propTypes

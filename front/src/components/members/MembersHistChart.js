@@ -8,7 +8,7 @@ import { transition } from 'd3-transition'
 import { map } from 'd3-collection'
 import { getPartyProp } from '../../utils'
 
-export class HistChart extends Component {
+export class MembersHistChart extends Component {
   static propTypes = {
     dimension: PropTypes.string.isRequired,
     filter: PropTypes.string.isRequired,
