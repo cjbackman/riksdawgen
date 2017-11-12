@@ -1,26 +1,20 @@
 """Test Python App"""
-from flask import Flask, jsonify
+from flask import Flask, jsonify, current_app, Blueprint
 from flask_restplus import Api, Resource
 from flask_cors import CORS, cross_origin
 from api.members import members
 from redis import StrictRedis
 import json
 
-APP = Flask(__name__)
-CORS(APP)
-api = Api(APP)
 
-# Load configuration settings
-try:
-    APP.config.from_envvar('FLASK_SETTINGS')
-except:
-    # Use default settings if no settings specified.
-    APP.config['REDIS_SERVER'] = 'localhost'
-    # APP.config['DEBUG'] = True
+blueprint_api = Blueprint('api', __name__)
+CORS(blueprint_api)
+api = Api(blueprint_api)
 
 
-REDIS = StrictRedis(host=APP.config[
-                    'REDIS_SERVER'], port=6379, charset="utf-8", decode_responses=True)
+REDIS = StrictRedis(host=current_app.config[
+                    'REDIS_SERVER'], port=6379, charset="utf-8",
+                    decode_responses=True)
 
 # NOTE: Modules relying on REDIS cannot be imported until REDIS is created.
 from api.endpoints.member_api import ns as member_api
@@ -30,7 +24,8 @@ from api.endpoints.members_api import ns as members_api
 api.add_namespace(member_api)
 api.add_namespace(members_api)
 
-@APP.before_first_request
+
+@current_app.before_first_request
 def fetch_data():
     MP = members()
     members.fetch_data(MP)
@@ -43,13 +38,8 @@ def fetch_data():
         REDIS.set(p['member_id'], json.dumps(member_data))
 
 
-@APP.before_request
+@current_app.before_request
 def connect_to_data():
     if REDIS.exists("members") is False:
         print("MP is None, forced to fetch new. This shall not happen.")
         fetch_data()
-
-# Only to enable easy debugging on host development machines, without running gunicorn server.
-# Do not use flask server in production...
-#if __name__ == '__main__':
-#    APP.run(debug=True)
