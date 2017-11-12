@@ -42,17 +42,23 @@ class voting:
         voting_list = raw_json['voteringlista']['votering']
 
         output_list = []
-        filtered_obj = {}
-
+        
         print(number_of_votes)
         for i in range(0, number_of_votes):
+            filtered_obj = {}
             filtered_obj['vote'] = voting_list[i]['rost']
             filtered_obj['document_id'] = voting_list[i]['dok_id']
             filtered_obj['url_xml'] = voting_list[i]['votering_url_xml']
             filtered_obj['vote_id'] = voting_list[i]['votering_id']
             filtered_obj['name'] = voting_list[i]['namn']
             filtered_obj['item'] = voting_list[i]['punkt']
-            filtered_obj['date'] = voting_list[i]['systemdatum'].split(' ')[0]
+
+            try:
+            	date = voting_list[i]['systemdatum'].split(' ')[0]
+            except:
+            	date = None
+
+            filtered_obj['date'] = date
 
             output_list.append(filtered_obj)
 
