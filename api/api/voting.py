@@ -5,7 +5,8 @@ import urllib
 import requests
 import json
 
-class voting: 
+
+class voting:
 
     max_number_of_hits = 500
 
@@ -35,14 +36,13 @@ class voting:
 
         return self.parse_data(fetched_data)
 
-
     def parse_data(self, raw_json):
 
         number_of_votes = int(raw_json['voteringlista']['@antal'])
         voting_list = raw_json['voteringlista']['votering']
 
         output_list = []
-        
+
         print(number_of_votes)
         for i in range(0, number_of_votes):
             filtered_obj = {}
@@ -54,14 +54,14 @@ class voting:
             filtered_obj['item'] = voting_list[i]['punkt']
 
             try:
-            	date = voting_list[i]['systemdatum'].split(' ')[0]
+                date = voting_list[i]['systemdatum'].split(' ')[0]
             except:
-            	date = None
+                date = None
 
             filtered_obj['date'] = date
 
             output_list.append(filtered_obj)
 
-        output_data = {'votes' : output_list}
+        output_data = {'votes': output_list}
 
         return output_data

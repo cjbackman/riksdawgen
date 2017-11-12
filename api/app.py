@@ -1,10 +1,13 @@
 import os
 import sys
 from flask import Flask
+from flask_cors import CORS, cross_origin
+
 
 
 def create_app(config):
     app = Flask(__name__)
+    CORS(app)
     # Load given stage config
     app.config.from_object(config)
     # Override with user config, if exists
@@ -26,16 +29,3 @@ configs = {
 # Use specifed environment config if set, otherwise production
 config = configs[os.environ.get('DEPLOY_ENV', 'prod')]
 app = create_app(config)
-
-if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        env = sys.argv[1]
-        if env != 'dev' and env != 'prod':
-            raise ValueError('Only dev and prod allowed as input environment.')
-        config = configs[env]
-    else:
-        config = configs[os.environ.get('DEPLOY_ENV', 'prod')]
-
-    print('Starting app with config {}'.format(config))
-    dev_app = create_app(config)
-    dev_app.run()

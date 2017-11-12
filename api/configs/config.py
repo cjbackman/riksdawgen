@@ -4,7 +4,7 @@ class BaseConfig(object):
 class DevelopmentConfig(BaseConfig):
     DEBUG = True
     REDIS_SERVER = 'localhost'
-    #SERVER_NAME = "riksdawgen:5000"
+    SERVER_NAME = "riksdawgen:5000"
 
 
 class ProductionConfig(BaseConfig):
