@@ -1,6 +1,9 @@
 #!/usr/bin/python
 
 from api.members import members
+from api.voting import voting
+from api.documents import documents
+
 from redis import StrictRedis
 
 
@@ -8,16 +11,18 @@ class database() :
 
     REDIS = None
 
-    members   = None
-    documents = None
-    voting    = None
+    _members   = None
+    _documents = None
+    _voting    = None
 
     def __init__(self, host):
         """ Constructor """
         self.REDIS = StrictRedis(host=host, port=6379, charset="utf-8",
                     decode_responses=True)
 
-        self.members = members()
+        self._members = members()
+        self._voting = voting()
+        self._documents = documents()
         
         print("database created!")
         pass
@@ -27,13 +32,13 @@ class database() :
 
         if self.REDIS.exists("members") is False:
         
-            self.members.fetch_data()
+            self._members.fetch_data()
 
-            filt_data = self.members.get_output_data()
+            filt_data = self._members.get_output_data()
             self.REDIS.set("members", json.dumps(filt_data))
 
             for p in filt_data['members']:
-                member_data = self.members.get_member_data(p['member_id'])
+                member_data = self._members.get_member_data(p['member_id'])
                 self.REDIS.set(p['member_id'], json.dumps(member_data))  
         
         return self.REDIS.get('members')
@@ -48,11 +53,20 @@ class database() :
 
     def get_documents(self, member_id):
         """ Retreive all document data for to a member"""
-        pass
+
+        member_doc_list = self._documents.member_doc(member_id)
+
+        if (member_doc_list is None):
+            member_doc_list="{}"
+
+        return member_doc_list
 
     def get_voting(self, member_id):
         """ Retreive all voting data for a member"""
-        pass
+
+        raw_json = self._voting.get_data(member_id)
+
+        return raw_json
 
     def get_document(self, doc_id):
         """ Retreive document data for specific document"""

@@ -4,8 +4,6 @@ from flask_restplus import Namespace, Resource, fields
 from flask import jsonify
 import json
 from api import DB 
-from api.voting import voting
-from api.documents import documents
 
 ns = Namespace('member', description='Retreival of member data.')
 
@@ -31,9 +29,9 @@ class member_API(Resource):
     @ns.response(404, 'Member not found.') #Documentation
     def get(self, member_id):
         """Retreive detailed data for a single member."""
-        V = voting()
-        raw_json = voting.get_data(V, member_id)
-
+        
+        raw_json = DB.get_voting(member_id)
+        
         return jsonify(raw_json)
 
 @ns.route('/<string:member_id>/documents')
@@ -45,10 +43,6 @@ class member_doc_API(Resource):
     def get(self, member_id):
         """Retreive documents related to a single member."""
 
-        doc = documents()
-        member_doc_list = doc.member_doc(member_id)
-
-        if (member_doc_list is None):
-            memberdoc="{}"
+        member_doc_list = DB.get_documents(member_id)
 
         return jsonify(member_doc_list)
