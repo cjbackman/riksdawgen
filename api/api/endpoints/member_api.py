@@ -3,7 +3,7 @@
 from flask_restplus import Namespace, Resource, fields
 from flask import jsonify
 import json
-from api import REDIS
+from api import DB 
 from api.voting import voting
 from api.documents import documents
 
@@ -16,7 +16,7 @@ class member_API(Resource):
     @ns.response(404, 'Member not found.') #Documentation
     def get(self, member_id):
         """Retreive detailed data for a single member."""
-        member = REDIS.get(member_id)
+        member = DB.get_member(member_id)
 
         if(member is None):
             #member="{}"
