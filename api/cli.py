@@ -1,5 +1,5 @@
 import sys
-from app import create_app, configs
+from factory import create_app, configs
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
