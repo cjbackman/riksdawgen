@@ -8,7 +8,7 @@ import json
 
 class voting: 
 
-    max_number_of_hits = 500
+    max_number_of_hits = 100
 
     base_url = 'http://data.riksdagen.se/voteringlista/?'
 

@@ -6,6 +6,8 @@ from api.documents import documents
 
 from redis import StrictRedis
 
+import json
+
 
 class database() : 
 
@@ -64,7 +66,13 @@ class database() :
     def get_voting(self, member_id):
         """ Retreive all voting data for a member"""
 
-        raw_json = self._voting.get_data(member_id)
+        key = 'voting-%s' % (member_id)
+
+        if self.REDIS.exists(key) is False:
+            raw_json = json.dumps(self._voting.get_data(member_id))
+            self.REDIS.set(key, raw_json)
+        else:
+            raw_json = self.REDIS.get(key)
 
         return raw_json
 

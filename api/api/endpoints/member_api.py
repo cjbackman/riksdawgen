@@ -32,7 +32,7 @@ class member_API(Resource):
         
         raw_json = DB.get_voting(member_id)
         
-        return jsonify(raw_json)
+        return jsonify(json.loads(raw_json))
 
 @ns.route('/<string:member_id>/documents')
 class member_doc_API(Resource):
