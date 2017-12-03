@@ -2,7 +2,8 @@
 @import './spinner.scss';
 @import './d3.scss';
 
-html, body {
+html,
+body {
   font-family: 'Quicksand';
 }
 
@@ -19,10 +20,15 @@ html, body {
   height: 100vh;
 }
 
+@media screen and (max-width: 768px) {
+  ul {
+    display: block !important;
+  }
+}
 
 // BULMA - Change defaul variables here
-$link : darkgrey;
-$link-hover : black;
+$link: darkgrey;
+$link-hover: black;
 $pagination-current-color: white;
 $pagination-border-color: darkgrey;
 $pagination-current-border-color: darkgrey;

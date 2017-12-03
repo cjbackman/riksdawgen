@@ -16,13 +16,15 @@ export class TextInput extends React.Component {
 
   render() {
     return (
-      <input
-        className="input"
-        type="text"
-        placeholder={this.props.placeholder}
-        value={this.state.text}
-        onChange={this.handleChange}
-      />
+      <div className="control">
+        <input
+          className="input is-small"
+          type="text"
+          placeholder={this.props.placeholder}
+          value={this.state.text}
+          onChange={this.handleChange}
+        />
+      </div>
     )
   }
 }

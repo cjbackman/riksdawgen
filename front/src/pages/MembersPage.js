@@ -16,11 +16,11 @@ const _MembersPage = ({ isFetching, members }) =>
   ) : (
     <div className="columns">
       <div className="column is-6">
-        <h2 className="subtitle border-bottom">Ledamöter</h2>
+        {/* <h2 className="subtitle border-bottom">Ledamöter</h2> */}
         <MembersTable members={members} />
       </div>
       <div className="column is-6">
-        <h2 className="subtitle border-bottom">En smutt graf</h2>
+        {/* <h2 className="subtitle border-bottom">En smutt graf</h2> */}
         <MembersBargraph members={members} />
       </div>
     </div>

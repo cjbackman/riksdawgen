@@ -46,27 +46,18 @@ export class MembersTable extends React.Component {
           <div className="column">
             <div className="field">
               <label className="label is-size-7">Ledamot</label>
-              <div className="control">
-                <TextInput
-                  handleChange={this.onNameChanged}
-                  placeholder="Sök"
-                />
-              </div>
+              <TextInput handleChange={this.onNameChanged} placeholder="Sök" />
             </div>
           </div>
           <div className="column">
             <div className="field">
               <label className="label is-size-7">Parti</label>
-              <div className="control">
-                <div className="select">
-                  <Dropdown
-                    options={partyOptions}
-                    valProp="value"
-                    labelProp="label"
-                    handleChange={this.onPartyChanged}
-                  />
-                </div>
-              </div>
+              <Dropdown
+                options={partyOptions}
+                valProp="value"
+                labelProp="label"
+                handleChange={this.onPartyChanged}
+              />
             </div>
           </div>
         </div>

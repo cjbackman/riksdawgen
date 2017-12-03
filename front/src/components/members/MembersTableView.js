@@ -7,7 +7,7 @@ const propTypes = {
 }
 
 export const MembersTableView = ({ members }) => (
-  <table className="table is-fullwidth table is-striped is-hoverable">
+  <table className="table is-fullwidth table is-striped is-hoverable is-size-7">
     <thead>
       <tr>
         <th style={{ width: '40%' }}>Namn</th>

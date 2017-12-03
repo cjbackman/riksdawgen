@@ -5,7 +5,7 @@ import { ParliamentPie } from '../components/parliament-pie/ParliamentPie'
 export const HomePage = () => (
   <div>
     <h1 className="title has-text-centered">Riksdawgen</h1>
-    <div className="has-text-centered">
+    <div className="has-text-centered" id="parliament-pie-container">
       <ParliamentPie />
     </div>
     <div

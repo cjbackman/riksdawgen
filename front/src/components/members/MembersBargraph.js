@@ -5,7 +5,7 @@ import { MembersHistChart } from './MembersHistChart'
 import { Spinner } from '../_shared/Spinner'
 import { parties } from '../../utils'
 
-const filters = [{ value: 'all', label: 'Alla' }, ...parties]
+const filters = [...parties]
 const dimensions = [
   { value: 'age', label: 'åldersfördelningen' },
   { value: 'assignment_count', label: 'uppdragsfördelningen' }
@@ -32,28 +32,25 @@ export class MembersBargraph extends Component {
   render() {
     return (
       <div>
+        <div className="label has-text-centered is-size-7">Frågeställning</div>
         <div className="level">
           <div className="level-item">
             <span style={{ marginRight: '1rem' }}>Hur ser</span>
-            <span className="select">
-              <Dropdown
-                options={dimensions}
-                valProp="value"
-                labelProp="label"
-                handleChange={this.handleDimChange}
-              />
-            </span>
+            <Dropdown
+              options={dimensions}
+              valProp="value"
+              labelProp="label"
+              handleChange={this.handleDimChange}
+            />
             <span style={{ marginLeft: '1rem', marginRight: '1rem' }}>
               ut, bland
             </span>
-            <span className="select">
-              <Dropdown
-                options={filters}
-                valProp="value"
-                labelProp="label"
-                handleChange={this.handleFilterChange}
-              />
-            </span>
+            <Dropdown
+              options={filters}
+              valProp="value"
+              labelProp="label"
+              handleChange={this.handleFilterChange}
+            />
           </div>
         </div>
         <div className="has-text-centered">
@@ -65,7 +62,7 @@ export class MembersBargraph extends Component {
               filter={this.state.selectedFilter.value}
               from={this.state.selectedDimension.from}
               to={this.state.selectedDimension.to}
-              size={[500, 600]}
+              size={[600, 450]}
               data={this.props.members}
             />
           )}

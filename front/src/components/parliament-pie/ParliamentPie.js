@@ -7,14 +7,6 @@ import { interpolate } from 'd3-interpolate'
 import { parties } from '../../utils'
 import { Spinner } from '../_shared/Spinner'
 
-const settings = {
-  width: 350,
-  height: 225,
-  radius: 175,
-  innerRadius: 30,
-  pi: Math.PI
-}
-
 const addText = node => {
   return node
     .append('svg:text')
@@ -22,12 +14,15 @@ const addText = node => {
     .style('font-size', '12px')
 }
 
-const addTspan = (node, text) => {
-  node
+const addTspan = (node, text, header) => {
+  const tspan = node
     .append('tspan')
     .attr('x', '-50')
     .attr('dy', '15')
     .text(text)
+  if (header) {
+    tspan.style('font-weight', 'bold')
+  }
 }
 
 const propTypes = {
@@ -37,7 +32,26 @@ const propTypes = {
 
 class _ParliamentPie extends Component {
   state = {
-    data: []
+    data: [],
+    width: 350,
+    height: 225,
+    radius: 175,
+    innerRadius: 30,
+    pi: Math.PI
+  }
+
+  componentDidMount() {
+    const element = document.getElementById('parliament-pie-container')
+    this.setState({
+      width: Math.min(element.offsetWidth, 350),
+      height: Math.min(element.offsetHeight, 225),
+      radius: Math.min(element.offsetWidth / 2, 175),
+      innerRadius: Math.min(element.offsetWidth / 2 / 6, 30)
+    })
+    if (this.props.members.length > 0) {
+      const data = this.getNumOfMembersPerParty(this.props.members)
+      this.setState({ data })
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -67,33 +81,32 @@ class _ParliamentPie extends Component {
         age: average
       })
     }
-    console.log(data)
     return data
   }
 
   createHistChart = () => {
     const node = this.node
 
-    var vis = select(node)
+    const vis = select(node)
       .data([this.state.data])
-      .attr('width', settings.width)
-      .attr('height', settings.height)
+      .attr('width', this.state.width)
+      .attr('height', this.state.height)
       .append('svg:g')
       .attr(
         'transform',
-        'translate(' + settings.radius + ',' + settings.radius + ')'
+        'translate(' + this.state.radius + ',' + this.state.radius + ')'
       )
 
-    var _arc = arc()
-      .outerRadius(settings.radius)
-      .innerRadius(settings.innerRadius)
+    const _arc = arc()
+      .outerRadius(this.state.radius)
+      .innerRadius(this.state.innerRadius)
 
-    var _pie = pie()
+    const _pie = pie()
       .value((d, i) => this.state.data[i].count)
-      .startAngle(-90 * (settings.pi / 180))
-      .endAngle(90 * (settings.pi / 180))
+      .startAngle(-90 * (this.state.pi / 180))
+      .endAngle(90 * (this.state.pi / 180))
 
-    var pieces = vis
+    const pieces = vis
       .selectAll('g.slice')
       .data(_pie)
       .enter()
@@ -120,9 +133,9 @@ class _ParliamentPie extends Component {
         node.style('opacity', '0.8')
 
         node = addText(node)
-        addTspan(node, `Parti: ${this.state.data[i].label}`)
+        addTspan(node, `${this.state.data[i].label}`, true)
         addTspan(node, `Antal ledamöter: ${this.state.data[i].count}`)
-        addTspan(node, `Medelålder: ${this.state.data[i].age.toFixed(2)}`)
+        addTspan(node, `Medelålder: ${this.state.data[i].age.toFixed(2)} år`)
       })
       .on('mouseout', (d, i, nodes) => {
         let node = select(nodes[i])
@@ -136,7 +149,13 @@ class _ParliamentPie extends Component {
       this.createHistChart()
     }
     return (
-      <div style={{ minHeight: '200px' }}>
+      <div
+        style={{
+          height: this.state.height,
+          width: this.state.width,
+          margin: '0 auto'
+        }}
+      >
         {this.props.isFetching ? <Spinner /> : null}
         <svg
           ref={node => {

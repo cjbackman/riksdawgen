@@ -45,9 +45,13 @@ export class Dropdown extends React.Component {
     const value = this.state.selected[this.props.valProp]
 
     return (
-      <select value={value} onChange={this.handleChange}>
-        {dropDownOptions}
-      </select>
+      <div className="control">
+        <div className="select is-small">
+          <select value={value} onChange={this.handleChange}>
+            {dropDownOptions}
+          </select>
+        </div>
+      </div>
     )
   }
 }

@@ -176,8 +176,8 @@ export class MembersHistChart extends Component {
         ref={node => {
           this.node = node
         }}
-        width={500}
-        height={600}
+        width={this.props.size[0]}
+        height={this.props.size[1]}
       />
     )
   }
