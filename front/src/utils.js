@@ -1,12 +1,12 @@
 export const parties = [
-  { value: 'S', label: 'Socialdemokraterna', color: '#EE2020', sortOrder: 1 },
-  { value: 'M', label: 'Moderaterna', color: '#1B49DD', sortOrder: 2 },
-  { value: 'SD', label: 'Sverigedemokraterna', color: '#DDDD00', sortOrder: 3 },
-  { value: 'MP', label: 'Miljöpartiet', color: '#83CF39', sortOrder: 4 },
-  { value: 'C', label: 'Centerpartiet', color: '#009933', sortOrder: 5 },
-  { value: 'V', label: 'Vänsterpartiet', color: '#AF0000', sortOrder: 6 },
-  { value: 'L', label: 'Liberalerna', color: '#6BB7EC', sortOrder: 7 },
-  { value: 'KD', label: 'Kristdemokraterna', color: '#231977', sortOrder: 8 }
+  { value: 'S', label: 'Socialdemokraterna', color: '#D64541', sortOrder: 1 }, // #EE2020
+  { value: 'M', label: 'Moderaterna', color: '#59ABE3', sortOrder: 2 }, // #1B49DD
+  { value: 'SD', label: 'Sverigedemokraterna', color: '#F5D76E', sortOrder: 3 }, // #DDDD00
+  { value: 'MP', label: 'Miljöpartiet', color: '#26A65B', sortOrder: 4 }, // #83CF39
+  { value: 'C', label: 'Centerpartiet', color: '#1E824C', sortOrder: 5 }, // #009933
+  { value: 'V', label: 'Vänsterpartiet', color: '#96281B', sortOrder: 6 }, // #AF0000
+  { value: 'L', label: 'Liberalerna', color: '#89C4F4', sortOrder: 7 }, // #6BB7EC
+  { value: 'KD', label: 'Kristdemokraterna', color: '#1F3A93', sortOrder: 8 } // #231977
 ]
 
 export const getPartyProp = (val, prop) => {

@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const range = (start, end) => Array.from({ length: (end - start) }, (v, k) => k + start)
+const range = (start, end) =>
+  Array.from({ length: end - start }, (v, k) => k + start)
 
 export class Pagination extends React.Component {
   state = { pager: {} }
@@ -13,19 +14,19 @@ export class Pagination extends React.Component {
     size: PropTypes.string
   }
 
-  componentWillMount () {
+  componentWillMount() {
     if (this.props.items && this.props.items.length) {
       this.setPage(1)
     }
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (this.props.items.length !== prevProps.items.length) {
       this.setPage(1)
     }
   }
 
-  setPage (page) {
+  setPage(page) {
     page = page || 1
     let items = this.props.items
     let totalItems = items.length
@@ -47,7 +48,7 @@ export class Pagination extends React.Component {
     this.props.onChangePage(pageOfItems)
   }
 
-  getPager (totalItems, totalPages, pageSize, currentPage) {
+  getPager(totalItems, totalPages, pageSize, currentPage) {
     let startPage, endPage
     if (totalPages <= 10) {
       // less than 10 total pages so show all
@@ -84,7 +85,7 @@ export class Pagination extends React.Component {
     }
   }
 
-  render () {
+  render() {
     var pager = this.state.pager
 
     if (!pager.pages || pager.pages.length <= 1) {
@@ -92,22 +93,42 @@ export class Pagination extends React.Component {
     }
 
     return (
-      <nav className={'pagination is-centered ' + (this.props.size === 'small' ? 'is-size-7' : '')}>
-        <ul className='pagination-list'>
+      <nav
+        className={
+          'pagination is-centered ' +
+          (this.props.size === 'small' ? 'is-size-7' : '')
+        }
+      >
+        <ul className="pagination-list">
           <li onClick={() => this.setPage(1)}>
-            <a className={'pagination-link ' + (pager.currentPage === 1 ? 'is-invisible' : '')}>
+            <a
+              className={
+                'pagination-link ' +
+                (pager.currentPage === 1 ? 'is-invisible' : '')
+              }
+            >
               Första
             </a>
           </li>
-          {pager.pages.map((page, index) =>
+          {pager.pages.map((page, index) => (
             <li key={index} onClick={() => this.setPage(page)}>
-              <a className={'pagination-link ' + (pager.currentPage === page ? 'is-current' : '')}>
+              <a
+                className={
+                  'pagination-link ' +
+                  (pager.currentPage === page ? 'is-current' : '')
+                }
+              >
                 {page}
               </a>
             </li>
-          )}
+          ))}
           <li onClick={() => this.setPage(pager.totalPages)}>
-            <a className={'pagination-link ' + (pager.currentPage === pager.totalPages ? 'is-invisible' : '')}>
+            <a
+              className={
+                'pagination-link ' +
+                (pager.currentPage === pager.totalPages ? 'is-invisible' : '')
+              }
+            >
               Sista
             </a>
           </li>

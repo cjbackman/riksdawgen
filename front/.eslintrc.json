@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": [ "standard", "standard-jsx", "standard-react"],
+  "extends": ["standard", "standard-jsx", "standard-react"],
   "env": {
     "browser": true,
     "es6": true,
@@ -9,5 +9,9 @@
   "globals": {
     "process": false,
     "global": false
+  },
+  "rules": {
+    "jsx-quotes": ["error", "prefer-double"],
+    "space-before-function-paren": ["error", { "named": "never" }]
   }
 }

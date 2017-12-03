@@ -17,10 +17,15 @@ export class MemberVotesTable extends React.Component {
     this.setState({ pagedVotes })
   }
 
-  render () {
+  render() {
     return [
-      <MemberVotesTableView key='votestable' votes={this.state.pagedVotes} />,
-      <Pagination key='pagination' items={this.props.votes} onChangePage={this.onChangePage} pageSize={15} />
+      <MemberVotesTableView key="votestable" votes={this.state.pagedVotes} />,
+      <Pagination
+        key="pagination"
+        items={this.props.votes}
+        onChangePage={this.onChangePage}
+        pageSize={15}
+      />
     ]
   }
 }

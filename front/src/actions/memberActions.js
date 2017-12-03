@@ -16,7 +16,6 @@ const receiveMembers = members => {
 }
 
 export const fetchMembers = () => {
-  console.log('GET MEMBERS')
   return dispatch => {
     dispatch(requestMembers())
 

@@ -11,29 +11,33 @@ export class Dropdown extends React.Component {
     handleChange: PropTypes.func.isRequired
   }
 
-  componentDidMount () {
+  componentDidMount() {
     let selected = this.props.options[0]
     this.updateSelected(selected)
   }
 
-  handleChange = (event) => {
-    let selected = this.props.options
-      .find(o => o[this.props.valProp] === event.target.value)
+  handleChange = event => {
+    let selected = this.props.options.find(
+      o => o[this.props.valProp] === event.target.value
+    )
     this.updateSelected(selected)
   }
 
-  updateSelected = (selected) => {
-    this.setState({selected})
+  updateSelected = selected => {
+    this.setState({ selected })
     this.props.handleChange(selected)
   }
 
-  render () {
-    if (this.props.options.length === 0) { return null }
+  render() {
+    if (this.props.options.length === 0) {
+      return null
+    }
 
     const dropDownOptions = this.props.options.map(option => (
       <option
         key={option[this.props.valProp]}
-        value={option[this.props.valProp]}>
+        value={option[this.props.valProp]}
+      >
         {option[this.props.labelProp]}
       </option>
     ))
@@ -41,9 +45,7 @@ export class Dropdown extends React.Component {
     const value = this.state.selected[this.props.valProp]
 
     return (
-      <select
-        value={value}
-        onChange={this.handleChange}>
+      <select value={value} onChange={this.handleChange}>
         {dropDownOptions}
       </select>
     )

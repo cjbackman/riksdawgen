@@ -1,20 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { ParliamentPie } from '../components/parliament-pie/ParliamentPie'
 
 export const HomePage = () => (
-  <div className='container'>
-    <h1 className='title has-text-centered'>Riksdawgen</h1>
-    <div className='tabs is-centered is-fullwidth' style={{ marginTop: '10rem' }}>
+  <div>
+    <h1 className="title has-text-centered">Riksdawgen</h1>
+    <div className="has-text-centered">
+      <ParliamentPie />
+    </div>
+    <div
+      className="tabs is-centered is-fullwidth"
+      style={{ marginTop: '3rem' }}
+    >
       <ul>
         <li>
-          <Link to={`members`}>
-            Vad gör min politiker?
-          </Link>
+          <Link to={`members`}>Vad gör min politiker?</Link>
         </li>
         <li>
-          <Link to={`budget`}>
-            Vad kostar Sverige?
-          </Link>
+          <Link to={`votes`}>Hur röstar våra politiker?</Link>
         </li>
       </ul>
     </div>

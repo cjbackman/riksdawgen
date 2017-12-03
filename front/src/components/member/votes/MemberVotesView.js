@@ -8,7 +8,7 @@ const propTypes = {
 
 export const MemberVotesView = ({ votes }) => (
   <div>
-    <h2 className='subtitle'>Voteringar</h2>
+    <h2 className="subtitle">Voteringar</h2>
     <MemberVotesTable votes={votes} />
   </div>
 )

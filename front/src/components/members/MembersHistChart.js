@@ -16,22 +16,24 @@ export class MembersHistChart extends Component {
     data: PropTypes.array.isRequired
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.createHistChart()
   }
-  componentDidUpdate () {
+  componentDidUpdate() {
     this.createHistChart()
   }
 
   createHistChart = () => {
     const node = this.node
     const t = transition().duration(500)
-    const margin = {top: 20, right: 20, bottom: 50, left: 20}
+    const margin = { top: 20, right: 20, bottom: 50, left: 20 }
     const width = this.props.size[0] - margin.right - margin.left
     const height = this.props.size[1] - margin.top - margin.bottom
 
     // Clear svg
-    select(node).selectAll('*').remove()
+    select(node)
+      .selectAll('*')
+      .remove()
 
     // Add wrapper g
     let wrapper = select(node)
@@ -43,8 +45,16 @@ export class MembersHistChart extends Component {
     const dimension = this.props.dimension
     const filterByParty = this.props.filter
     let data = this.props.data.slice(0)
-    data.sort((x, y) => ascending(getPartyProp(x.party, 'sortOrder'), getPartyProp(y.party, 'sortOrder')))
-    data = filterByParty === 'all' ? data : data.filter(d => d.party === filterByParty)
+    data.sort((x, y) =>
+      ascending(
+        getPartyProp(x.party, 'sortOrder'),
+        getPartyProp(y.party, 'sortOrder')
+      )
+    )
+    data =
+      filterByParty === 'all'
+        ? data
+        : data.filter(d => d.party === filterByParty)
 
     // Set scale
     const maxValue = max(data, d => d[dimension]) + 5
@@ -68,21 +78,27 @@ export class MembersHistChart extends Component {
     binContainer.exit().remove()
 
     // Add new containers
-    let binContainerEnter = binContainer.enter()
+    let binContainerEnter = binContainer
+      .enter()
       .append('g')
       .attr('transform', d => `translate(${x(d.x0)}, ${height})`)
 
     // Populate the bin containers with data
-    binContainerEnter.selectAll('hist-mp-circle')
-      .data(d => d.map((p, i) => {
-        return {
-          idx: i,
-          name: p.name,
-          value: p[dimension],
-          party: p.party,
-          radius: (x(d.x1) - x(d.x0)) / 2
-        }
-      }), d => d.member_id)
+    binContainerEnter
+      .selectAll('hist-mp-circle')
+      .data(
+        d =>
+          d.map((p, i) => {
+            return {
+              idx: i,
+              name: p.name,
+              value: p[dimension],
+              party: p.party,
+              radius: (x(d.x1) - x(d.x0)) / 2
+            }
+          }),
+        d => d.member_id
+      )
       .enter()
       .append('circle')
       .attr('class', 'hist-mp-circle')
@@ -93,24 +109,28 @@ export class MembersHistChart extends Component {
       .attr('r', d => d.radius)
 
     // Enter + update
-    binContainerEnter.merge(binContainer)
+    binContainerEnter
+      .merge(binContainer)
       .attr('transform', d => `translate(${x(d.x0)}, ${height})`)
 
     // Bind data
-    let dots = binContainer
-      .selectAll('hist-mp-circle')
-      .data(d => d.map((p, i) => {
-        return {
-          idx: i,
-          name: p.name,
-          value: p[dimension],
-          party: p.party,
-          radius: (x(d.x1) - x(d.x0)) / 2
-        }
-      }), d => d.member_id)
+    let dots = binContainer.selectAll('hist-mp-circle').data(
+      d =>
+        d.map((p, i) => {
+          return {
+            idx: i,
+            name: p.name,
+            value: p[dimension],
+            party: p.party,
+            radius: (x(d.x1) - x(d.x0)) / 2
+          }
+        }),
+      d => d.member_id
+    )
 
     // Remove elements no longer present in data
-    dots.exit()
+    dots
+      .exit()
       .transition(t)
       .attr('r', 0)
       .remove()
@@ -119,7 +139,8 @@ export class MembersHistChart extends Component {
     dots.style('fill', d => getPartyProp(d.party, 'color'))
 
     // Add new dots found in data
-    dots.enter()
+    dots
+      .enter()
       .append('circle')
       .attr('class', 'hist-mp-circle')
       .attr('cx', 0)
@@ -137,17 +158,27 @@ export class MembersHistChart extends Component {
       .call(axisBottom(x))
 
     // Add axis label
-    let labels = {'age': 'Ålder', 'assignment_count': 'Antal uppdrag'}
-    wrapper.append('text')
-      .attr('transform', `translate(${width / 2}, ${height + margin.bottom / 3})`)
+    let labels = { age: 'Ålder', assignment_count: 'Antal uppdrag' }
+    wrapper
+      .append('text')
+      .attr(
+        'transform',
+        `translate(${width / 2}, ${height + margin.bottom / 3})`
+      )
       .attr('dy', '1em')
       .style('text-anchor', 'middle')
       .text(labels[dimension])
   }
 
-  render () {
+  render() {
     return (
-      <svg ref={node => { this.node = node }} width={500} height={600} />
+      <svg
+        ref={node => {
+          this.node = node
+        }}
+        width={500}
+        height={600}
+      />
     )
   }
 }

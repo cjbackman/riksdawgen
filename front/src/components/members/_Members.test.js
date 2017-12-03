@@ -9,7 +9,15 @@ describe('<MembersTable />', () => {
   })
 
   it('should render header row + three rows', () => {
-    const wrapper = shallow(<MembersTable members={[{tilltalsnamn: '1'}, {tilltalsnamn: '2'}, {tilltalsnamn: '3'}]} />)
+    const wrapper = shallow(
+      <MembersTable
+        members={[
+          { tilltalsnamn: '1' },
+          { tilltalsnamn: '2' },
+          { tilltalsnamn: '3' }
+        ]}
+      />
+    )
     expect(wrapper.find('tr')).toHaveLength(4)
   })
 })

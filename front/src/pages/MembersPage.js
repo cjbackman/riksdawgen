@@ -10,19 +10,21 @@ const propTypes = {
   members: PropTypes.array.isRequired
 }
 
-const _MembersPage = ({ isFetching, members }) => (
-  isFetching ? <Spinner />
-    : <div className='columns'>
-      <div className='column is-6'>
-        <h2 className='subtitle border-bottom'>Ledamöter</h2>
+const _MembersPage = ({ isFetching, members }) =>
+  isFetching ? (
+    <Spinner />
+  ) : (
+    <div className="columns">
+      <div className="column is-6">
+        <h2 className="subtitle border-bottom">Ledamöter</h2>
         <MembersTable members={members} />
       </div>
-      <div className='column is-6'>
-        <h2 className='subtitle border-bottom'>En smutt graf</h2>
+      <div className="column is-6">
+        <h2 className="subtitle border-bottom">En smutt graf</h2>
         <MembersBargraph members={members} />
       </div>
     </div>
-)
+  )
 
 _MembersPage.propTypes = propTypes
 

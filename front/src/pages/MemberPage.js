@@ -12,12 +12,12 @@ const propTypes = {
 }
 
 export const MemberPage = ({ match }) => (
-  <div className='columns'>
-    <div className='column is-one-third'>
+  <div className="columns">
+    <div className="column is-one-third">
       <MemberInfo memberId={match.params.id} />
-      <h2 className='subtitle'>Dokument</h2>
+      <h2 className="subtitle">Dokument</h2>
     </div>
-    <div className='column is-two-thirds'>
+    <div className="column is-two-thirds">
       <MemberVotes memberId={match.params.id} />
     </div>
   </div>

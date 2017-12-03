@@ -7,10 +7,8 @@ const propTypes = {
 }
 
 const _PartyPage = ({ party }) => (
-  <div className='content-wrapper'>
-    <div className='one-third'>
-      {party}
-    </div>
+  <div className="content-wrapper">
+    <div className="one-third">{party}</div>
   </div>
 )
 

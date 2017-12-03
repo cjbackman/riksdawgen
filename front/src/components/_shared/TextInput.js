@@ -9,19 +9,20 @@ export class TextInput extends React.Component {
     placeholder: PropTypes.string
   }
 
-  handleChange = (event) => {
-    this.setState({text: event.target.value})
+  handleChange = event => {
+    this.setState({ text: event.target.value })
     this.props.handleChange(event.target.value)
   }
 
-  render () {
+  render() {
     return (
       <input
-        className='input'
-        type='text'
+        className="input"
+        type="text"
         placeholder={this.props.placeholder}
         value={this.state.text}
-        onChange={this.handleChange} />
+        onChange={this.handleChange}
+      />
     )
   }
 }
