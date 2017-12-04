@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { MembersTable } from '../components/members/MembersTable'
 import { MembersBargraph } from '../components/members/MembersBargraph'
+import { GenderBarChart } from '../components/gender-bar-chart/GenderBarChart'
 import { Spinner } from '../components/_shared/Spinner'
 
 const propTypes = {
@@ -14,14 +15,19 @@ const _MembersPage = ({ isFetching, members }) =>
   isFetching ? (
     <Spinner />
   ) : (
-    <div className="columns">
-      <div className="column is-6">
-        {/* <h2 className="subtitle border-bottom">Ledamöter</h2> */}
-        <MembersTable members={members} />
+    <div>
+      <div className="columns">
+        <div className="column is-6">
+          <MembersTable members={members} />
+        </div>
+        <div className="column is-6">
+          <MembersBargraph members={members} />
+        </div>
       </div>
-      <div className="column is-6">
-        {/* <h2 className="subtitle border-bottom">En smutt graf</h2> */}
-        <MembersBargraph members={members} />
+      <div className="columns">
+        <div className="column is-6">
+          <GenderBarChart members={members} />
+        </div>
       </div>
     </div>
   )

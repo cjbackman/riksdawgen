@@ -26,7 +26,7 @@ export class MembersHistChart extends Component {
   createHistChart = () => {
     const node = this.node
     const t = transition().duration(500)
-    const margin = { top: 20, right: 20, bottom: 50, left: 20 }
+    const margin = { top: 0, right: 20, bottom: 50, left: 20 }
     const width = this.props.size[0] - margin.right - margin.left
     const height = this.props.size[1] - margin.top - margin.bottom
 
@@ -158,7 +158,7 @@ export class MembersHistChart extends Component {
       .call(axisBottom(x))
 
     // Add axis label
-    let labels = { age: 'Ålder', assignment_count: 'Antal uppdrag' }
+    let labels = { age: 'Åldersfördelning', assignment_count: 'Antal uppdrag' }
     wrapper
       .append('text')
       .attr(
