@@ -65,7 +65,7 @@ export class MembersTable extends React.Component {
         <Pagination
           items={filteredMembers}
           onChangePage={this.onChangePage}
-          pageSize={12}
+          pageSize={15}
         />
       </div>
     )

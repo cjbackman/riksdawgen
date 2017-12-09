@@ -8,7 +8,7 @@ import { transition } from 'd3-transition'
 import { map } from 'd3-collection'
 import { getPartyProp } from '../../utils'
 
-export class MembersHistChart extends Component {
+export class AgeHistChart extends Component {
   static propTypes = {
     dimension: PropTypes.string.isRequired,
     filter: PropTypes.string.isRequired,
@@ -26,7 +26,7 @@ export class MembersHistChart extends Component {
   createHistChart = () => {
     const node = this.node
     const t = transition().duration(500)
-    const margin = { top: 0, right: 20, bottom: 50, left: 20 }
+    const margin = { top: 10, right: 20, bottom: 50, left: 20 }
     const width = this.props.size[0] - margin.right - margin.left
     const height = this.props.size[1] - margin.top - margin.bottom
 

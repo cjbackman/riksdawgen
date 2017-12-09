@@ -12,7 +12,7 @@ export const PartySelector = ({ onChange }) => (
       <div
         key={i}
         className="column has-text-centered"
-        onClick={() => onChange(p)}
+        onClick={() => onChange(p.value)}
       >
         <img
           src={p.logo}

@@ -33,3 +33,10 @@ $pagination-current-color: white;
 $pagination-border-color: darkgrey;
 $pagination-current-border-color: darkgrey;
 @import '~bulma/bulma';
+
+.in-middle {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}

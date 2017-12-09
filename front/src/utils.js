@@ -77,3 +77,52 @@ SD_fbc700
 V_da291c
 KD_005ea1
 */
+
+export const getMembersPerGender = members => {
+  if (members.length === 0) return []
+  const groupedByParty = members.reduce((result, member) => {
+    result[member.party] = result[member.party] || []
+    result[member.party].push(member)
+    return result
+  }, Object.create(null))
+
+  let data = []
+  for (let party of parties) {
+    const { value, color } = party
+    let members = groupedByParty[party.value]
+    for (let gender of ['man', 'kvinna']) {
+      let count = (members.filter(m => m.gender === gender) || []).length
+      data.push({
+        label: value,
+        color,
+        count,
+        gender
+      })
+    }
+  }
+  return data
+}
+
+export const getNumOfMembersPerParty = members => {
+  if (members.length === 0) return []
+  const groupedByParty = members.reduce((result, member) => {
+    result[member.party] = result[member.party] || []
+    result[member.party].push(member)
+    return result
+  }, Object.create(null))
+
+  let data = []
+  for (let party of parties) {
+    let members = groupedByParty[party.value]
+    let average =
+      members.reduce((sum, val) => sum + val.age, 0) / members.length
+    data.push({
+      party: party.value,
+      label: party.label,
+      color: party.color,
+      count: members.length,
+      age: average
+    })
+  }
+  return data
+}
