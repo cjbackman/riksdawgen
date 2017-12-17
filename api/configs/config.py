@@ -3,8 +3,8 @@ class BaseConfig(object):
 
 class DevelopmentConfig(BaseConfig):
     DEBUG = True
-    REDIS_SERVER = 'localhost'
-    #SERVER_NAME = "riksdawgen:5000"
+    REDIS_SERVER = 'redis'
+    SERVER_NAME = "riksdawgen:5000"
 
 
 class ProductionConfig(BaseConfig):

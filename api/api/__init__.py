@@ -1,14 +1,12 @@
 """Test Python App"""
 from flask import Flask, jsonify, current_app, Blueprint
 from flask_restplus import Api, Resource
-from flask_cors import CORS, cross_origin
 from api.members import members
 from redis import StrictRedis
 import json
 
 
 blueprint_api = Blueprint('api', __name__)
-CORS(blueprint_api)
 api = Api(blueprint_api)
 
 
