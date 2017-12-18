@@ -8,7 +8,7 @@ import { GenderBarChart } from '../components/gender-bar-chart/GenderBarChart'
 import { GenderDonutChart } from '../components/gender-donut-chart/GenderDonutChart'
 import { AgeHistChart } from '../components/age-hist-chart/AgeHistChart'
 import { Spinner } from '../components/_shared/Spinner'
-// import { parties } from '../utils'
+import { AgeBarChart } from '../components/age-bar-chart/AgeBarChart'
 
 const propTypes = {
   isFetching: PropTypes.bool.isRequired,
@@ -67,6 +67,7 @@ class _HomePage extends Component {
               <Spinner />
             ) : (
               <ParliamentPie
+                party={this.state.party}
                 members={this.props.members}
                 onChange={this.partyChanged}
               />
@@ -83,7 +84,7 @@ class _HomePage extends Component {
                 data={this.props.members}
               />
             ) : (
-              <div>Här kommer en sjyst graf sen...</div>
+              <AgeBarChart members={this.props.members} />
             )}
           </div>
         </div>

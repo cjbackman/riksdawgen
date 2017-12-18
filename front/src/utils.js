@@ -78,13 +78,37 @@ V_da291c
 KD_005ea1
 */
 
-export const getMembersPerGender = members => {
-  if (members.length === 0) return []
-  const groupedByParty = members.reduce((result, member) => {
+const membersPerParty = members => {
+  return members.reduce((result, member) => {
     result[member.party] = result[member.party] || []
     result[member.party].push(member)
     return result
   }, Object.create(null))
+}
+
+export const averageAgePerParty = members => {
+  if (members.length === 0) return []
+  const groupedByParty = membersPerParty(members)
+
+  let data = []
+  for (let party of parties) {
+    const { value, color } = party
+    let members = groupedByParty[party.value]
+    let averageAge =
+      members.reduce((result, member) => result + member.age, 0) /
+      members.length
+    data.push({
+      label: value,
+      color,
+      averageAge
+    })
+  }
+  return data
+}
+
+export const getMembersPerGender = members => {
+  if (members.length === 0) return []
+  const groupedByParty = membersPerParty(members)
 
   let data = []
   for (let party of parties) {
@@ -96,7 +120,8 @@ export const getMembersPerGender = members => {
         label: value,
         color,
         count,
-        gender
+        gender,
+        percentage: count / members.length
       })
     }
   }
@@ -105,11 +130,7 @@ export const getMembersPerGender = members => {
 
 export const getNumOfMembersPerParty = members => {
   if (members.length === 0) return []
-  const groupedByParty = members.reduce((result, member) => {
-    result[member.party] = result[member.party] || []
-    result[member.party].push(member)
-    return result
-  }, Object.create(null))
+  const groupedByParty = membersPerParty(members)
 
   let data = []
   for (let party of parties) {

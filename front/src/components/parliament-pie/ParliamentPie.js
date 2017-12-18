@@ -26,7 +26,8 @@ const addTspan = (node, text, header) => {
 
 const propTypes = {
   members: PropTypes.array.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  party: PropTypes.string
 }
 const settings = {
   maxRadius: 250
@@ -52,6 +53,26 @@ export class ParliamentPie extends Component {
       },
       () => this.drawHistChart()
     )
+  }
+
+  addLabel = (party, node, pieNode) => {
+    select(node)
+      .selectAll('.slice')
+      .select('#selected_party')
+      .remove()
+
+    if (this.props.party === party.party) {
+      this.props.onChange(undefined)
+      return
+    }
+    this.props.onChange(party.party)
+
+    if (party) {
+      const textNode = addText(pieNode)
+      addTspan(textNode, `${party.label}`, true)
+      addTspan(textNode, `Antal ledamöter: ${party.count}`)
+      addTspan(textNode, `Medelålder: ${party.age.toFixed(2)} år`)
+    }
   }
 
   drawHistChart = () => {
@@ -90,10 +111,8 @@ export class ParliamentPie extends Component {
       .innerRadius(this.state.innerRadius)
 
     const _pie = pie().value((d, i) => membersPerParty[i].count)
-    // .startAngle(-90 * (this.state.pi / 180))
-    // .endAngle(90 * (this.state.pi / 180))
 
-    const pieces = vis
+    let pieces = vis
       .selectAll('g.slice')
       .data(_pie)
       .enter()
@@ -126,19 +145,7 @@ export class ParliamentPie extends Component {
       })
       .on('click', (d, i, nodes) => {
         let pieNode = select(nodes[i])
-
-        select(node)
-          .selectAll('.slice')
-          .style('opacity', '1')
-          .select('#selected_party')
-          .remove()
-
-        pieNode.style('opacity', 0.8)
-        pieNode = addText(pieNode)
-        addTspan(pieNode, `${membersPerParty[i].label}`, true)
-        addTspan(pieNode, `Antal ledamöter: ${membersPerParty[i].count}`)
-        addTspan(pieNode, `Medelålder: ${membersPerParty[i].age.toFixed(2)} år`)
-        this.props.onChange(d.data.party)
+        this.addLabel(d.data, node, pieNode)
       })
   }
 

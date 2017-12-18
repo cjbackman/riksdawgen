@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { select } from 'd3-selection'
-import { arc, pie } from 'd3-shape'
+import { arc } from 'd3-shape'
+import { format } from 'd3-format'
+import { interpolate } from 'd3-interpolate'
 import { getMembersPerGender } from '../../utils'
 
 const propTypes = {
@@ -43,45 +45,68 @@ export class GenderDonutChart extends Component {
 
   drawDonutChart = () => {
     const membersPerGender = getMembersPerGender(this.props.members)
-    const genders = membersPerGender.filter(m => m.label === this.props.party)
-    this.createDonutChart(genders)
+    const numOfWomen = membersPerGender.filter(
+      m => m.label === this.props.party && m.gender === 'kvinna'
+    )[0]
+    this.createDonutChart(numOfWomen)
   }
 
-  createDonutChart = genders => {
+  createDonutChart = numOfWomen => {
     const node = this.node
-    var width = this.state.radius * 2
-    var height = this.state.radius * 2
-    var radius = this.state.radius
-    var donutWidth = this.state.radius * 0.8
+    const tau = 2 * Math.PI
+    const { color, percentage } = numOfWomen
+    // const duration = 1500
+    // const transition = 200
+    // const percent = 45
 
     select(node)
       .selectAll('*')
       .remove()
 
-    const vis = select(node)
-      .data([genders])
-      .attr('width', width)
-      .attr('height', height)
-      .append('g')
-      .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
+    const radius = this.state.radius
+    const _format = format('.0%')
 
     const _arc = arc()
-      .innerRadius(radius - donutWidth)
+      .innerRadius(radius * 0.8)
       .outerRadius(radius)
+      .startAngle(0)
 
-    var _pie = pie().value(d => d.count)
+    var svg = select(node)
+      .attr('width', radius * 2)
+      .attr('height', radius * 2)
+      .append('g')
+      .attr('transform', 'translate(' + radius + ',' + radius + ')')
 
-    const pieces = vis
-      .selectAll('path')
-      .data(_pie)
-      .enter()
-
-    pieces
+    svg
       .append('path')
-      .attr('fill', d => d.data.color)
+      .datum({ endAngle: tau })
+      .style('fill', color)
+      .style('opacity', 0.4)
       .attr('d', _arc)
-      .attr('stroke', '#fff')
-      .style('opacity', d => (d.data.gender === 'kvinna' ? 1 : 0.4))
+
+    var text = svg
+      .append('text')
+      .attr('text-anchor', 'middle')
+      .attr('dy', '.3em')
+
+    var foreground = svg
+      .append('path')
+      .datum({ endAngle: 0 })
+      .style('fill', color)
+      .attr('d', _arc)
+
+    foreground
+      .transition()
+      .duration(750)
+      .attrTween('d', d => {
+        var i = interpolate(0, percentage * tau)
+        var i2 = interpolate(0, percentage * 100)
+        return t => {
+          d.endAngle = i(t)
+          text.text(_format(i2(t) / 100))
+          return _arc(d)
+        }
+      })
   }
 
   render() {
